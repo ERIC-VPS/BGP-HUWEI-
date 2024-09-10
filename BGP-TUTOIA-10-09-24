@@ -1,0 +1,534 @@
+<VS-BGP>display current-configuration 
+!Software Version V800R022C00SPC600
+!Last configuration was updated at 2024-09-05 22:41:23-03:00 by caetano
+!Last configuration was saved at 2024-09-05 23:32:36-03:00 by caetano
+!kms_feature --
+#
+sysname VS-BGP
+#
+undo FTP server-source all-interface
+undo FTP ipv6 server-source all-interface
+#
+service-template template-default0
+#
+service-template template-default1
+#
+service-template template-default2
+#
+service-template template-default3
+#
+service-template template-default4
+#
+ntp-service server source-interface all disable
+ntp-service ipv6 server source-interface all disable
+#
+rsa peer-public-key 10.99.100.10
+ public-key-code begin
+ 30820108       
+  02820101      
+    00BC2EC7 8B8AA817 31C7093D EE292F4A AAC6E581 72A5F69B 5C6F2040 2C8454B7
+    FEEA9AAD 63EA43CC 7658085F 8E217F53 01F91227 7F17BD21 AC7A92DC 1BC85DE7
+    F5024312 7EFFA62D 9EF899A4 865B2238 05222B90 596C6821 416D5C42 DC8C130B
+    BD000187 86A2EF28 6CABCFFB 729BBF14 4193D334 C888E5EC 70E4D459 6BB953CB
+    A45CF82F 3C50274A 5463B1BA 031144B9 6157F31D FB9FF276 131BBC4B 8C26E0DE
+    87729E9E 06F66C47 250A5CB7 EDC01B19 C158D714 28842A89 3DC2061A F262AF3C
+    69E46721 FA0078C7 FB834E57 C1D9FF62 36175772 3AF4E326 8FB31C71 A13AC292
+    C10E82C8 EAF1EE92 4AF12705 CDA8A9B4 557F2A0F 57B47252 8B12469A 814E32D1
+    45          
+  0201          
+    03          
+ public-key-code end
+ peer-public-key end
+#               
+undo icmp name timestamp-reply send
+#               
+router id 10.99.99.1
+#               
+as-notation plain
+#               
+undo telnet server-source all-interface
+undo telnet ipv6 server-source all-interface
+#               
+dhcp server request-packet all-interface disable
+#               
+acl name NTF-SNMP number 2000
+ rule 10 permit source 45.167.140.12 0
+#               
+aaa             
+ user-password password-force-change disable
+ local-user caetano password irreversible-cipher $1d$jD|{HYMcaLf2&WXj$!}m5~JSt02^\K1QvnJ*XJyuKV/28qP=Erx%ec"F0$
+ local-user caetano service-type ssh
+ local-user caetano level 3
+ local-user caetano state block fail-times 3 interval 5
+ #              
+ authentication-scheme default0
+ #              
+ authentication-scheme default1
+ #              
+ authentication-scheme default
+  authentication-mode local
+ #              
+ authorization-scheme default
+ #              
+ accounting-scheme default0
+ #              
+ accounting-scheme default1
+ #              
+ domain default0
+ #              
+ domain default1
+ #              
+ domain default_admin
+#               
+ospfv3 1        
+ router-id 10.99.99.1
+ silent-interface all
+ undo silent-interface Virtual-Ethernet0/2/21.1014
+ undo silent-interface 25GE0/5/22.4000
+ default-route-advertise always
+ preference 110 
+ area 0.0.0.0   
+#               
+interface Ethernet0/0/0
+ undo shutdown  
+#               
+interface 25GE0/5/22.4000
+ vlan-type dot1q 4000
+ description CGNAT
+ ipv6 enable    
+ ip address 10.99.100.9 255.255.255.252
+ ipv6 address auto link-local
+ statistic enable
+ ospfv3 1 area 0.0.0.0
+ ospfv3 network-type p2p
+ ospf network-type p2p
+ ospf enable 1 area 0.0.0.0
+#               
+interface 25GE0/5/34.2710
+ vlan-type dot1q 2710
+ description IPT-STAR1
+ ipv6 enable    
+ ip address 10.8.54.26 255.255.255.252
+ ipv6 address 2804:60D4:7000::16/126
+ statistic enable
+#               
+interface 25GE0/5/35.2610
+ vlan-type dot1q 2610
+ description IPT-MEGALINK
+ ipv6 enable    
+ ip address 10.254.0.198 255.255.255.252
+ ipv6 address 2804:2D40:2000::9E/126
+ statistic enable
+#               
+interface 25GE0/5/35.2611
+ vlan-type dot1q 2611
+#               
+interface LoopBack0
+ ipv6 enable    
+ ip address 10.99.99.1 255.255.255.255
+ ip address 45.167.143.2 255.255.255.255 sub
+ ipv6 address 2804:5698:900::1/128
+#               
+interface LoopBack1
+#               
+interface Virtual-Ethernet0/2/21.1014
+ vlan-type dot1q 1014
+ description INTERVS
+ ipv6 enable    
+ ip address 10.99.100.1 255.255.255.252
+ ipv6 address auto link-local
+ statistic enable
+ ospfv3 1 area 0.0.0.0
+ ospfv3 network-type p2p
+ ospf network-type p2p
+ ospf enable 1 area 0.0.0.0
+#               
+interface NULL0 
+#               
+bgp 268011      
+ router-id 10.99.99.1
+ graceful-restart
+ undo check-first-as
+ private-4-byte-as enable
+ peer 10.8.54.25 as-number 269194
+ peer 10.8.54.25 description IPT-STAR1
+ peer 10.254.0.197 as-number 265269
+ peer 10.254.0.197 description IPT-MEGALINK
+ peer 2804:2D40:2000::9D as-number 265269
+ peer 2804:2D40:2000::9D description IPT-MEGALINK
+ peer 2804:60D4:7000::15 as-number 269194
+ peer 2804:60D4:7000::15 description IPT-STAR1
+ #              
+ ipv4-family unicast
+  undo synchronization
+  network 45.167.143.0 255.255.255.0 route-policy AS268011-IPV4
+  peer 10.8.54.25 enable
+  peer 10.8.54.25 route-policy C01-IMPORT-V4 import
+  peer 10.8.54.25 route-policy C01-EXPORT-V4 export
+  peer 10.8.54.25 next-hop-local
+  peer 10.8.54.25 advertise-community
+  peer 10.8.54.25 advertise-ext-community
+  peer 10.254.0.197 enable
+  peer 10.254.0.197 route-policy C02-IMPORT-V4 import
+  peer 10.254.0.197 route-policy C02-EXPORT-V4 export
+  peer 10.254.0.197 next-hop-local
+  peer 10.254.0.197 advertise-community
+  peer 10.254.0.197 advertise-ext-community
+ #              
+ ipv6-family unicast
+  undo synchronization
+  network 2804:5698:900:: 40 route-policy AS268011-IPV6
+  peer 2804:2D40:2000::9D enable
+  peer 2804:2D40:2000::9D route-policy C02-IMPORT-V6 import
+  peer 2804:2D40:2000::9D route-policy C02-EXPORT-V6 export
+  peer 2804:2D40:2000::9D next-hop-local
+  peer 2804:2D40:2000::9D advertise-community
+  peer 2804:2D40:2000::9D advertise-ext-community
+  peer 2804:60D4:7000::15 enable
+  peer 2804:60D4:7000::15 route-policy C01-IMPORT-V6 import
+  peer 2804:60D4:7000::15 route-policy C01-EXPORT-V6 export
+  peer 2804:60D4:7000::15 next-hop-local
+  peer 2804:60D4:7000::15 advertise-community
+  peer 2804:60D4:7000::15 advertise-ext-community
+#               
+ospf 1 router-id 10.99.99.1
+ default-route-advertise always
+ silent-interface all
+ undo silent-interface Virtual-Ethernet0/2/21.1014
+ undo silent-interface 25GE0/5/22.4000
+ preference 110 
+ opaque-capability enable
+ area 0.0.0.0   
+#               
+route-policy AS268011-IPV4 permit node 100
+ apply local-preference 99100
+ apply community 64011:50209 64011:50102
+#               
+route-policy AS268011-IPV6 permit node 100
+ apply local-preference 99100
+ apply community 64011:60009
+#               
+route-policy C01-EXPORT-V4 deny node 10
+ if-match community-filter C01-EXPORT-BLOCK
+#               
+route-policy C01-EXPORT-V4 permit node 80
+ if-match community-filter C01-EXPORT-2P
+ apply as-path 268011 additive
+#               
+route-policy C01-EXPORT-V4 permit node 90
+ if-match community-filter GLOBAL-EXPORT-UPSTREAM-DEFAULT
+#               
+route-policy C01-EXPORT-V4 permit node 100
+ if-match community-filter C01-EXPORT-DEFAULT
+#               
+route-policy C01-EXPORT-V6 permit node 10
+ if-match community-filter C01-EXPORT-BLOCK
+#               
+route-policy C01-EXPORT-V6 permit node 90
+ if-match community-filter GLOBAL-EXPORT-UPSTREAM-DEFAULT
+#               
+route-policy C01-EXPORT-V6 permit node 100
+ if-match community-filter C01-EXPORT-DEFAULT
+#               
+route-policy C01-IMPORT-V4 deny node 10
+ if-match ip-prefix BOGONS
+#               
+route-policy C01-IMPORT-V4 permit node 100
+ apply local-preference 150
+ apply community 64011:50100
+#               
+route-policy C01-IMPORT-V6 permit node 100
+ apply local-preference 150
+ apply community 64454:50200
+#               
+route-policy C02-EXPORT-V4 deny node 10
+ if-match community-filter C02-EXPORT-BLOCK
+#               
+route-policy C02-EXPORT-V4 permit node 90
+ if-match community-filter GLOBAL-EXPORT-UPSTREAM-DEFAULT
+#               
+route-policy C02-EXPORT-V4 permit node 100
+ if-match community-filter C02-EXPORT-DEFAULT
+#               
+route-policy C02-EXPORT-V6 deny node 10
+ if-match community-filter C02-EXPORT-BLOCK
+#               
+route-policy C02-EXPORT-V6 permit node 90
+ if-match community-filter GLOBAL-EXPORT-UPSTREAM-DEFAULT
+#               
+route-policy C02-EXPORT-V6 permit node 100
+ if-match community-filter C02-EXPORT-DEFAULT
+#               
+route-policy C02-IMPORT-V4 deny node 10
+ if-match ip-prefix BOGONS
+#               
+route-policy C02-IMPORT-V4 permit node 100
+ apply local-preference 150
+ apply community 64011:50100
+#               
+route-policy C02-IMPORT-V6 permit node 100
+ apply local-preference 150
+ apply community 64454:50200
+#               
+ip ip-prefix BOGONS index 110 permit 10.0.0.0 8 greater-equal 8 less-equal 32
+ip ip-prefix BOGONS index 115 permit 127.0.0.0 8 greater-equal 8 less-equal 32
+ip ip-prefix BOGONS index 120 permit 169.254.0.0 16 greater-equal 16 less-equal 32
+ip ip-prefix BOGONS index 125 permit 172.16.0.0 12 greater-equal 12 less-equal 32
+ip ip-prefix BOGONS index 130 permit 192.0.0.0 24 greater-equal 24 less-equal 32
+ip ip-prefix BOGONS index 135 permit 192.0.2.0 24 greater-equal 24 less-equal 32
+ip ip-prefix BOGONS index 140 permit 192.88.99.0 24 greater-equal 24 less-equal 32
+ip ip-prefix BOGONS index 145 permit 192.168.0.0 16 greater-equal 16 less-equal 32
+ip ip-prefix BOGONS index 150 permit 198.18.0.0 15 greater-equal 15 less-equal 32
+ip ip-prefix BOGONS index 155 permit 198.51.100.0 24 greater-equal 24 less-equal 32
+ip ip-prefix BOGONS index 160 permit 203.0.113.0 24 greater-equal 24 less-equal 32
+ip ip-prefix BOGONS index 165 permit 224.0.0.0 4 greater-equal 4 less-equal 32
+ip ip-prefix BOGONS index 170 permit 240.0.0.0 4 greater-equal 4 less-equal 32
+ip ip-prefix BOGONS index 175 permit 255.255.255.255 32
+ip community-filter basic BACKBONE-ROUTE index 10 permit 64011:10090
+ip community-filter basic C01-EXPORT-2P index 10 permit 64011:50102
+ip community-filter basic C01-EXPORT-5P index 10 permit 64011:50105
+ip community-filter basic C01-EXPORT-BLACKHOLE index 10 permit 64011:50166
+ip community-filter basic C01-EXPORT-BLOCK index 10 permit 64011:50167
+ip community-filter basic C01-EXPORT-DEFAULT index 10 permit 64011:50109
+ip community-filter basic C01-EXPORT-NOEXPORT index 10 permit 64011:50108
+ip community-filter basic C01-RECEIVED index 10 permit 64011:50100
+ip community-filter basic C02-EXPORT-2P index 10 permit 64011:50202
+ip community-filter basic C02-EXPORT-5P index 10 permit 64011:50205
+ip community-filter basic C02-EXPORT-BLACKHOLE index 10 permit 64011:50266
+ip community-filter basic C02-EXPORT-BLOCK index 10 permit 64011:50267
+ip community-filter basic C02-EXPORT-DEFAULT index 10 permit 64011:50209
+ip community-filter basic C02-EXPORT-NOEXPORT index 10 permit 64011:50208
+ip community-filter basic C02-RECEIVED index 10 permit 64011:50200
+ip community-filter basic GLOBAL-EXPORT-BLACKHOLE index 10 permit 64011:666
+ip community-filter basic GLOBAL-EXPORT-UPSTREAM-2P index 10 permit 64011:60002
+ip community-filter basic GLOBAL-EXPORT-UPSTREAM-DEFAULT index 10 permit 64011:60009
+ip community-filter basic GLOBAL-EXPORT-UPSTREAM-NOEXPORT index 10 permit 64011:60008
+#               
+ip route-static 0.0.0.0 0.0.0.0 10.8.54.25 preference 1
+ip route-static 0.0.0.0 0.0.0.0 10.254.0.197 preference 3
+ip route-static 45.167.143.0 255.255.255.0 NULL0 description PREFIX-4-24-AS268011
+ip route-static 64.63.0.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.1.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.2.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.3.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.4.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.5.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.6.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.7.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.8.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.9.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.10.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.11.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.12.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.13.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.14.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.15.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.16.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.17.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.18.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.19.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.20.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.21.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.22.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.23.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.24.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.25.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.26.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.27.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.28.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.29.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.30.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.31.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.32.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.33.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.34.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.35.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.36.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.37.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.38.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.39.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.40.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.41.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.42.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.43.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.44.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.45.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.46.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.47.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.48.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.49.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.50.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.51.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.52.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.53.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.54.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.55.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.56.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.57.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.58.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.59.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.60.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.61.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.62.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.63.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.160.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.161.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.162.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.163.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.164.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.165.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.166.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.167.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.168.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.169.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.170.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.171.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.172.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.173.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.174.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.175.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.176.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.177.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.178.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.179.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.180.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.181.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.182.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.183.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.184.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.185.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.186.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.187.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.188.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.189.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.190.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.191.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 103.252.112.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 103.252.113.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 103.252.114.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 103.252.115.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 104.244.40.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 104.244.41.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 104.244.42.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 104.244.44.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 104.244.45.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 104.244.46.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 104.244.47.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 188.64.224.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 188.64.225.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 188.64.226.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 188.64.227.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 188.64.228.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 188.64.229.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 188.64.230.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 188.64.231.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 192.133.76.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 192.133.77.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 192.133.78.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 192.133.79.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 199.16.156.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 199.16.157.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 199.16.158.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 199.16.159.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 199.59.148.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 199.59.149.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 199.59.150.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 199.59.151.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 199.96.56.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 199.96.57.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 202.160.128.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 202.160.129.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 202.160.130.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 202.160.131.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.192.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.193.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.194.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.195.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.196.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.197.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.198.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.199.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.200.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.201.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.202.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.203.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.204.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.205.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.206.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.207.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.208.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.209.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.210.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.211.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.212.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.213.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.214.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.215.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.216.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.217.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.218.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.219.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.220.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.221.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.222.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.223.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+#               
+ipv6 route-static :: 0 2804:60D4:7000::15 preference 1
+ipv6 route-static 2804:5698:900:: 40 NULL0 description PREFIX-40-AS268011
+#               
+snmp-agent      
+snmp-agent local-engineid 800007DB03A070B75630DC03
+snmp-agent community read cipher %^%#PrY:4O8otJt>e[Wc6o+CrX<J&}y4'Hsy]iI~}{qU8lnJJOjaaUJ6(H8yZR"):6BM&{)k|RzX2b!,#86)%^%# alias __CommunityAliasName_01_40893
+#               
+snmp-agent sys-info contact noc@nokeconsultoria.com.br
+snmp-agent sys-info version all
+snmp-agent community complexity-check disable
+#               
+snmp-agent udp-port 2161
+#               
+snmp-agent protocol source-status all-interface
+snmp-agent protocol source-status ipv6 all-interface
+#               
+undo snmp-agent proxy protocol source-status all-interface
+undo snmp-agent proxy protocol source-status ipv6 all-interface
+#               
+stelnet server enable
+ssh server rsa-key min-length 3072
+ssh ipv4 server port 65022
+ssh ipv6 server port 65022
+ssh user caetano
+ssh user caetano authentication-type password
+ssh user caetano service-type all
+undo ssh server-source all-interface
+ssh ipv6 server-source all-interface
+ssh authorization-type default aaa
+#               
+ssh server cipher aes256_gcm aes128_gcm aes256_ctr aes192_ctr aes128_ctr
+ssh server hmac sha2_512 sha2_256
+ssh server key-exchange dh_group_exchange_sha256
+#               
+ssh server publickey rsa_sha2_256 rsa_sha2_512
+#               
+ssh server dh-exchange min-len 3072
+#               
+ssh client first-time enable
+ssh client peer 10.99.100.10 assign rsa-key 10.99.100.10
+#               
+ssh client publickey rsa_sha2_256 rsa_sha2_512
+#               
+ssh client cipher aes256_gcm aes128_gcm aes256_ctr aes192_ctr aes128_ctr
+ssh client hmac sha2_512 sha2_256
+ssh client key-exchange dh_group_exchange_sha256
+#               
+user-interface maximum-vty 21
+#               
+user-interface vty 0 4
+ authentication-mode aaa
+ user privilege level 3
+ idle-timeout 600 0
+ protocol inbound ssh
+#               
+local-aaa-server
+#               
+return          
+<VS-BGP>
