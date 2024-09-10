@@ -1,0 +1,754 @@
+NTF-BNG-ITZ-VS-ADM>switch virtual-system ?
+  CDN        Name of virtual system
+  IX-UAI     Name of virtual system
+  IX-UAI-02  Name of virtual system
+
+<NTF-BNG-ITZ-VS-ADM>switch virtual-system CDN
+<NTF-BNG-ITZ-VS-ADM-CDN>
+<NTF-BNG-ITZ-VS-ADM-CDN>
+<NTF-BNG-ITZ-VS-ADM-CDN>DIS
+<NTF-BNG-ITZ-VS-ADM-CDN>display CUR
+<NTF-BNG-ITZ-VS-ADM-CDN>display current-configuration 
+!Software Version V800R012C10SPC300
+!Last configuration was updated at 2024-06-23 20:23:24-03:00 by caetano(@VS:Admin-VS)
+!Last configuration was saved at 2024-01-29 18:32:34-03:00 by solintel(@VS:Admin-VS)
+#
+sysname CDN
+#
+undo FTP server-source all-interface
+undo FTP ipv6 server-source all-interface
+#
+service-template template-default0
+#
+service-template template-default1
+#
+service-template template-default2
+#
+service-template template-default3
+#
+service-template template-default4
+#
+undo icmp name timestamp-reply send
+#
+router id 10.99.99.1
+#
+as-notation plain
+#               
+ip netstream timeout active 1
+ip netstream timeout inactive 15
+ip netstream export version 9
+ip netstream export index-switch 32
+ip netstream export template timeout-rate 1
+ip netstream sampler fix-packets 1000 inbound
+ip netstream sampler fix-packets 1000 outbound
+ip netstream export source ipv6 2804:5698:100::2
+ip netstream export host ipv6 2A02:C206:2118:3508::1 9995
+#               
+ipv6 netstream timeout active 1
+ipv6 netstream timeout inactive 15
+ipv6 netstream export version 9
+ipv6 netstream export index-switch 32
+ipv6 netstream export template timeout-rate 1
+ipv6 netstream sampler fix-packets 1000 inbound
+ipv6 netstream sampler fix-packets 1000 outbound
+ipv6 netstream export source ipv6 2804:5698:100::2
+ipv6 netstream export host ipv6 2A02:C206:2118:3508::1 9995
+#               
+undo telnet server-source all-interface
+undo telnet ipv6 server-source all-interface
+#               
+dhcp server request-packet all-interface disable
+#               
+aaa             
+ local-user nocmonitor password irreversible-cipher $1c$E_[U~%/;]5$|W}zIienpD{^z#W@&|'E<N27Njalb:Y)\]<UMa~3$
+ local-user nocmonitor service-type ssh
+ local-user nocmonitor level 3
+ local-user nocmonitor state block fail-times 3 interval 5
+ #              
+ authentication-scheme default0
+ #              
+ authentication-scheme default1
+ #              
+ authentication-scheme default
+  authentication-mode local
+ #              
+ authorization-scheme default
+ #              
+ accounting-scheme default0
+ #              
+ accounting-scheme default1
+ #              
+ domain default0
+ #              
+ domain default1
+ #              
+ domain default_admin
+#               
+ospfv3 1        
+ router-id 45.167.140.2
+ import-route direct
+ import-route static
+ preference 110 
+ area 0.0.0.0   
+#               
+interface Eth-Trunk1.32
+ vlan-type dot1q 32
+ description CLI-CDN-IMPERANET
+ ipv6 enable    
+ ip address 172.21.21.9 255.255.255.252
+ ipv6 address 2804:5698:8001::9/126
+ statistic enable
+#               
+interface Eth-Trunk1.648
+ vlan-type dot1q 648
+ description CLI-CDN-JETZ
+ ipv6 enable    
+ ip address 172.21.21.13 255.255.255.252
+ ipv6 address 2804:5698:8001::D/126
+ statistic enable
+#               
+interface Eth-Trunk1.667
+ vlan-type dot1q 667
+ description INFORTEC-CDN-3GB
+ ipv6 enable    
+ ip address 172.21.0.1 255.255.255.252
+ ipv6 address 2804:5698:8001::15/126
+ statistic enable
+ ip netstream inbound
+ ip netstream outbound
+ ipv6 netstream inbound
+ ipv6 netstream outbound
+ qos car cir 3007200 cbs 18700000 green pass red discard inbound
+ qos car cir 3007200 cbs 18700000 green pass red discard outbound
+#               
+interface Eth-Trunk1.3090
+ vlan-type dot1q 3090
+ description [WAN] CDN-MNA-CONECT
+ ipv6 enable    
+ ip address 10.253.0.94 255.255.255.252
+ ipv6 address 2804:59F8:0:3:8000::12/126
+ statistic enable
+ ip netstream inbound
+ ipv6 netstream inbound
+#               
+interface Eth-Trunk1.3102
+ vlan-type dot1q 3102
+ description [WAN] CDN-VIANET
+ shutdown       
+ ip address 10.89.88.10 255.255.255.252
+ statistic enable
+ ip netstream inbound
+ ipv6 netstream inbound
+#               
+interface Eth-Trunk1.3300
+ vlan-type dot1q 3300
+ description [WAN] CDN-OCA-NETFACIL
+ ipv6 enable    
+ ip address 45.167.140.253 255.255.255.252
+ ipv6 address 2804:5698:100:4::1/64
+ statistic enable
+ ip netstream inbound
+ ipv6 netstream inbound
+#               
+interface Eth-Trunk1.3400
+ vlan-type dot1q 3400
+ description [WAN] CDN-GGC-NETFACIL
+ ipv6 enable    
+ ip address 45.167.140.129 255.255.255.192
+ ipv6 address 2804:5698:100:3::1/64
+ statistic enable
+ ip netstream inbound
+ ipv6 netstream inbound
+#               
+interface Eth-Trunk1.3700
+ vlan-type dot1q 3700
+ description [WAN] CDN-MNA-NETFACIL
+ ipv6 enable    
+ ip address 45.167.141.125 255.255.255.252
+ ipv6 address 2804:5698:8000::1/126
+ statistic enable
+ ip netstream inbound
+ ipv6 netstream inbound
+#               
+interface Eth-Trunk1.3904
+ vlan-type dot1q 3904
+ description [WAN] CDN-IMPERANET
+ ipv6 enable    
+ ip address 10.94.16.14 255.255.255.252
+ ipv6 address 2001:DB8:FFFF:EEEE:16::E/126
+ statistic enable
+ ip netstream inbound
+ ipv6 netstream inbound
+#               
+interface Ethernet0/0/0
+ undo shutdown  
+#               
+interface LoopBack0
+ ip address 10.99.99.1 255.255.255.255
+#               
+interface LoopBack1
+ ip address 45.167.140.2 255.255.255.255
+#               
+interface Virtual-Ethernet0/2/100.100
+ vlan-type dot1q 100
+ description VS-ADMIN
+ ipv6 enable    
+ ip address 100.121.0.2 255.255.255.252
+ ipv6 address 2804:5698:100::2/64
+ statistic enable
+ ospfv3 1 area 0.0.0.0
+ ospfv3 cost 100
+ ospfv3 network-type p2p
+ ospf network-type p2p
+ ospf enable 1 area 0.0.0.0
+#               
+interface NULL0 
+#               
+bgp 268011      
+ router-id 10.99.99.1
+ timer connect-retry 1
+ undo check-first-as
+ peer 10.94.16.13 as-number 265463
+ peer 10.94.16.13 description IMPERANET
+ peer 10.99.99.0 as-number 268011
+ peer 10.99.99.0 description iBGP-NE40
+ peer 10.99.99.0 timer keepalive 10 hold 30
+ peer 10.99.99.0 connect-interface LoopBack0
+ peer 10.253.0.93 as-number 268737
+ peer 10.253.0.93 description CONECT-TROCA-CDN
+ peer 45.167.140.190 as-number 11344
+ peer 45.167.140.190 description GGC-NODE-1
+ peer 45.167.140.190 timer keepalive 10 hold 30
+ peer 45.167.140.190 password cipher %^%#Z~}l~|=p]C'*i)+]i>4Su7;{)1tJ|O.':j*shOyX%^%#
+ peer 45.167.140.254 as-number 40027
+ peer 45.167.140.254 description NETFLIX-OCA-IPV4
+ peer 45.167.140.254 timer keepalive 10 hold 40
+ peer 45.167.141.144 as-number 63293
+ peer 45.167.141.144 description FACEBOOK-FNA-IPV4
+ peer 45.167.141.144 ebgp-max-hop 4
+ peer 45.167.141.144 timer keepalive 10 hold 40
+ peer 2001:DB8:FFFF:EEEE:16::D as-number 265463
+ peer 2001:DB8:FFFF:EEEE:16::D description IMPERANET-V6
+ peer 2804:5698:100::1 as-number 268011
+ peer 2804:5698:100::1 description LINK-NE8KROOT-NE8KCDN-IPv6
+ peer 2804:5698:100::1 timer keepalive 10 hold 30
+ peer 2804:5698:100:3::FFFE as-number 11344
+ peer 2804:5698:100:3::FFFE description GGC-V6
+ peer 2804:5698:100:3::FFFE password cipher %^%#`H;82*}D7KP^o\6OzU`E;!G45#2LMP|ybD~)2iO+%^%#
+ peer 2804:5698:100:4::13 as-number 40027
+ peer 2804:5698:100:4::13 description OCA-V6
+ peer 2804:5698:100:4::13 timer keepalive 10 hold 30
+ peer 2804:5698:100:4::13 connect-interface Eth-Trunk1.3300
+ peer 2804:5698:8000:1::10 as-number 63293
+ peer 2804:5698:8000:1::10 description FNA-V6
+ peer 2804:5698:8000:1::10 ebgp-max-hop 4
+ peer 2804:5698:8000:1::10 timer keepalive 10 hold 30
+ peer 2804:59F8:0:3:8000::11 as-number 268737
+ peer 2804:59F8:0:3:8000::11 description CONECT-TROCA-CDN
+ group CLIENTES-CDN external
+ peer 172.21.0.2 as-number 263255
+ peer 172.21.0.2 group CLIENTES-CDN
+ peer 172.21.0.2 description CLI-INFOTEC-CDN
+ peer 172.21.21.10 as-number 265463
+ peer 172.21.21.10 group CLIENTES-CDN
+ peer 172.21.21.10 description CLI-IMPERANET-CDN
+ peer 172.21.21.14 as-number 263335
+ peer 172.21.21.14 group CLIENTES-CDN
+ peer 172.21.21.14 description CLI-JETZ-CDN
+ peer 2804:5698:8001::A as-number 265463
+ peer 2804:5698:8001::A group CLIENTES-CDN
+ peer 2804:5698:8001::A description CLI-IMPERANET-CDN
+ peer 2804:5698:8001::E as-number 263335
+ peer 2804:5698:8001::E group CLIENTES-CDN
+ peer 2804:5698:8001::E description CLI-JETZ-CDN
+ peer 2804:5698:8001::16 as-number 263255
+ peer 2804:5698:8001::16 group CLIENTES-CDN
+ peer 2804:5698:8001::16 description CLI-INFOTEC-CDN
+ #              
+ ipv4-family unicast
+  undo synchronization
+  network 45.167.140.128 255.255.255.192
+  network 45.167.140.252 255.255.255.252
+  network 45.167.141.124 255.255.255.252
+  network 45.167.141.128 255.255.255.192
+  peer 10.94.16.13 enable
+  peer 10.94.16.13 route-policy IMPERANET-IMPORT import
+  peer 10.94.16.13 route-policy IMPERANET-EXPORT export
+  peer 10.94.16.13 advertise-community
+  peer 10.94.16.13 advertise-ext-community
+  peer 10.99.99.0 enable
+  peer 10.99.99.0 route-policy BGP-IN import
+  peer 10.99.99.0 route-policy BGP-OUT export
+  peer 10.99.99.0 reflect-client
+  peer 10.99.99.0 next-hop-local
+  peer 10.253.0.93 enable
+  peer 10.253.0.93 route-policy CONECT-CDN-IPV4-IN import
+  peer 10.253.0.93 route-policy CONECT-CDN-IPV4-OUT export
+  peer 45.167.140.190 enable
+  peer 45.167.140.190 route-policy RP-GGC-IMPORT import
+  peer 45.167.140.190 route-policy RP-GGC-EXPORT export
+  peer 45.167.140.190 advertise-community
+  peer 45.167.140.190 advertise-ext-community
+  peer 45.167.140.254 enable
+  peer 45.167.140.254 route-policy RP-NETFLIX-IMPORT import
+  peer 45.167.140.254 route-policy RP-NETFLIX-EXPORT export
+  peer 45.167.140.254 advertise-community
+  peer 45.167.140.254 advertise-ext-community
+  peer 45.167.141.144 enable
+  peer 45.167.141.144 route-policy RP-FACEBOOK-IMPORT import
+  peer 45.167.141.144 route-policy RP-FACEBOOK-EXPORT export
+  peer 45.167.141.144 advertise-community
+  peer 45.167.141.144 advertise-ext-community
+  peer CLIENTES-CDN enable
+  peer 172.21.0.2 enable
+  peer 172.21.0.2 group CLIENTES-CDN
+  peer 172.21.0.2 route-policy CLI-CDN-INFOTEC-IPV4-IN import
+  peer 172.21.0.2 route-policy BLOCOS-CDN-IPV4-OUT export
+  peer 172.21.21.10 enable
+  peer 172.21.21.10 group CLIENTES-CDN
+  peer 172.21.21.10 route-policy CLI-CDN-IMPERANET-IPV4-IN import
+  peer 172.21.21.10 route-policy BLOCOS-CDN-IPV4-OUT export
+  peer 172.21.21.14 enable
+  peer 172.21.21.14 group CLIENTES-CDN
+  peer 172.21.21.14 route-policy CLI-CDN-JETZ-IPV4-IN import
+  peer 172.21.21.14 route-policy BLOCOS-CDN-IPV4-OUT export
+ #              
+ ipv6-family unicast
+  undo synchronization
+  network 2804:5698:: 33
+  network 2804:5698:100:3:: 64
+  network 2804:5698:100:4:: 64
+  network 2804:5698:8000:: 33
+  network 2804:5698:8000:: 126
+  network 2804:5698:8000:1:: 64
+  peer 2001:DB8:FFFF:EEEE:16::D enable
+  peer 2001:DB8:FFFF:EEEE:16::D route-policy RP-IMPERANET-IMPORT import
+  peer 2001:DB8:FFFF:EEEE:16::D route-policy RP-IMPERANET-EXPORT export
+  peer 2001:DB8:FFFF:EEEE:16::D advertise-community
+  peer 2001:DB8:FFFF:EEEE:16::D advertise-ext-community
+  peer 2804:5698:100::1 enable
+  peer 2804:5698:100::1 route-policy RP-IBGPv6-IMPORT import
+  peer 2804:5698:100::1 route-policy RP-IBGPv6-EXPORT export
+  peer 2804:5698:100::1 next-hop-local
+  peer 2804:5698:100::1 advertise-community
+  peer 2804:5698:100::1 advertise-ext-community
+  peer 2804:5698:100:3::FFFE enable
+  peer 2804:5698:100:3::FFFE route-policy RP-GGCv6-IMPORT import
+  peer 2804:5698:100:3::FFFE route-policy RP-GGCv6-EXPORT export
+  peer 2804:5698:100:3::FFFE next-hop-local
+  peer 2804:5698:100:3::FFFE advertise-community
+  peer 2804:5698:100:3::FFFE advertise-ext-community
+  peer 2804:5698:100:4::13 enable
+  peer 2804:5698:100:4::13 route-policy RP-OCAv6-IMPORT import
+  peer 2804:5698:100:4::13 route-policy RP-OCAv6-EXPORT export
+  peer 2804:5698:100:4::13 next-hop-local
+  peer 2804:5698:100:4::13 advertise-community
+  peer 2804:5698:100:4::13 advertise-ext-community
+  peer 2804:5698:8000:1::10 enable
+  peer 2804:5698:8000:1::10 route-policy RP-FNAv6-IMPORT import
+  peer 2804:5698:8000:1::10 route-policy RP-FNAv6-EXPORT export
+  peer 2804:5698:8000:1::10 next-hop-local
+  peer 2804:5698:8000:1::10 advertise-community
+  peer 2804:5698:8000:1::10 advertise-ext-community
+  peer 2804:59F8:0:3:8000::11 enable
+  peer 2804:59F8:0:3:8000::11 route-policy CONECT-CDN-IPV6-IN import
+  peer 2804:59F8:0:3:8000::11 route-policy CONECT-CDN-IPV6-OUT export
+  peer CLIENTES-CDN enable
+  peer 2804:5698:8001::A enable
+  peer 2804:5698:8001::A group CLIENTES-CDN
+  peer 2804:5698:8001::A route-policy CLI-CDN-IMPERANET-IPV6-IN import
+  peer 2804:5698:8001::A route-policy BLOCOS-CDN-IPV6-OUT export
+  peer 2804:5698:8001::E enable
+  peer 2804:5698:8001::E group CLIENTES-CDN
+  peer 2804:5698:8001::E route-policy CLI-CDN-JETZ-IPV6-IN import
+  peer 2804:5698:8001::E route-policy BLOCOS-CDN-IPV6-OUT export
+  peer 2804:5698:8001::16 enable
+  peer 2804:5698:8001::16 group CLIENTES-CDN
+  peer 2804:5698:8001::16 route-policy CLI-CDN-INFOTEC-IPV6-IN import
+  peer 2804:5698:8001::16 route-policy BLOCOS-CDN-IPV6-OUT export
+#               
+ospf 1          
+ import-route direct
+ import-route static
+ silent-interface LoopBack0
+ preference 110 
+ area 0.0.0.0   
+  network 10.99.99.1 0.0.0.0 description Loopback
+  network 45.167.140.2 0.0.0.0 description Loopback1
+  network 100.121.0.0 0.0.0.3 description to-NE40
+#               
+route-policy BGP-IN permit node 10
+ description allow_peer
+#               
+route-policy BGP-IN deny node 100
+#               
+route-policy BGP-IP permit node 10
+ if-match community-filter CUSTOMERS
+#               
+route-policy BGP-OUT permit node 10
+ if-match ip-prefix PL-IBGP-OUT
+#               
+route-policy BGP-OUT deny node 100
+#               
+route-policy BLOCOS-CDN-IPV4-OUT permit node 100
+ if-match ip-prefix BLOCOS-CDN-IPV4-OUT
+#               
+route-policy BLOCOS-CDN-IPV6-OUT permit node 100
+ if-match ipv6 address prefix-list BLOCOS-CDN-IPV6-OUT
+#               
+route-policy CLI-CDN-IMPERANET-IPV4-IN permit node 100
+ if-match ip-prefix CLI-CDN-IMPERANET-IPV4-IN
+ apply local-preference 550
+ apply community 64712:30 additive
+ apply preferred-value 550
+#               
+route-policy CLI-CDN-IMPERANET-IPV6-IN permit node 100
+ if-match ipv6 address prefix-list CLI-CDN-IMPERANET-IPV6-IN
+ apply local-preference 550
+ apply community 64712:30 additive
+ apply preferred-value 550
+#               
+route-policy CLI-CDN-INFOTEC-IPV4-IN permit node 100
+ if-match ip-prefix CLI-CDN-INFOTEC-IPV4-IN
+ apply local-preference 550
+ apply community 64712:30 additive
+ apply preferred-value 550
+#               
+route-policy CLI-CDN-INFOTEC-IPV6-IN permit node 100
+ if-match ipv6 address prefix-list CLI-CDN-INFOTEC-IPV6-IN
+ apply local-preference 550
+ apply community 64712:30 additive
+ apply preferred-value 550
+#               
+route-policy CLI-CDN-JETZ-IPV4-IN permit node 100
+ if-match ip-prefix CLI-CDN-JETZ-IPV4-IN
+ apply local-preference 550
+ apply community 64712:30 additive
+ apply preferred-value 550
+#               
+route-policy CLI-CDN-JETZ-IPV6-IN permit node 100
+ if-match ipv6 address prefix-list CLI-CDN-JETZ-IPV6-IN
+ apply local-preference 550
+ apply community 64712:30 additive
+ apply preferred-value 550
+#               
+route-policy CONECT-CDN-IPV4-IN permit node 100
+ if-match ip-prefix CONECT-CDN-IPV4-IN
+ apply local-preference 650
+ apply community 64800:10 additive
+#               
+route-policy CONECT-CDN-IPV4-IN permit node 101
+ apply local-preference 650
+#               
+route-policy CONECT-CDN-IPV4-OUT permit node 100
+ if-match ip-prefix PL-MEU-BLOCO-FULL
+#               
+route-policy CONECT-CDN-IPV4-OUT permit node 200
+ if-match community-filter CUSTOMERS
+#               
+route-policy CONECT-CDN-IPV4-OUT permit node 250
+ if-match community-filter ANUNCIAR-PARCEIROS-CDN
+#               
+route-policy CONECT-CDN-IPV6-IN permit node 100
+ if-match ipv6 address prefix-list CONECT-CDN-IPV6-IN
+ apply local-preference 650
+ apply community 64800:10 additive
+#               
+route-policy CONECT-CDN-IPV6-OUT permit node 100
+ if-match ipv6 address prefix-list PL-MEUBLOCOv6-FULL
+#               
+route-policy CONECT-CDN-IPV6-OUT permit node 200
+ if-match community-filter CUSTOMERS
+#               
+route-policy CONECT-CDN-IPV6-OUT permit node 250
+ if-match community-filter ANUNCIAR-PARCEIROS-CDN
+#               
+route-policy DISCARD-ALL deny node 100
+#               
+route-policy IMPERANET-EXPORT permit node 100
+ if-match ip-prefix PL-MEU-BLOCO-FULL
+#               
+route-policy IMPERANET-EXPORT permit node 150
+ if-match ip-prefix BLOCO-CGNAT
+#               
+route-policy IMPERANET-EXPORT permit node 200
+ if-match community-filter CUSTOMERS
+#               
+route-policy IMPERANET-EXPORT permit node 250
+ if-match community-filter ANUNCIAR-PARCEIROS-CDN
+#               
+route-policy IMPERANET-IMPORT permit node 100
+#               
+route-policy RP-CDN-IMPERANET-IN permit node 10
+ if-match ip-prefix PL-CDN-IMPERANET-IN
+#               
+route-policy RP-CDN-IMPERANET-OUT permit node 10
+ if-match ip-prefix PL-CDN-IMPERANET
+#               
+route-policy RP-FACEBOOK-EXPORT permit node 100
+ if-match ip-prefix PL-MEU-BLOCO-FULL
+#               
+route-policy RP-FACEBOOK-EXPORT permit node 150
+ if-match ip-prefix BLOCO-CGNAT
+#               
+route-policy RP-FACEBOOK-EXPORT permit node 200
+ if-match community-filter CUSTOMERS
+#               
+route-policy RP-FACEBOOK-EXPORT deny node 250
+ if-match community-filter ANUNCIAR-PARCEIROS-CDN
+#               
+route-policy RP-FACEBOOK-IMPORT deny node 1000
+#               
+route-policy RP-FNAv6-EXPORT permit node 100
+ if-match ipv6 address prefix-list PL-MEUBLOCOv6-FULL
+#               
+route-policy RP-FNAv6-EXPORT permit node 150
+ if-match community-filter ANUNCIAR-PARCEIROS-CDN
+#               
+route-policy RP-FNAv6-EXPORT permit node 200
+ if-match community-filter CUSTOMERS
+#               
+route-policy RP-FNAv6-IMPORT deny node 1000
+#               
+route-policy RP-GGC-EXPORT permit node 100
+ if-match ip-prefix PL-MEU-BLOCO-FULL
+#               
+route-policy RP-GGC-EXPORT permit node 150
+ if-match ip-prefix BLOCO-CGNAT
+#               
+route-policy RP-GGC-EXPORT permit node 200
+ if-match community-filter CUSTOMERS
+#               
+route-policy RP-GGC-EXPORT permit node 250
+ if-match community-filter ANUNCIAR-PARCEIROS-CDN
+#               
+route-policy RP-GGC-IMPORT deny node 100
+#               
+route-policy RP-GGCv6-EXPORT permit node 100
+ if-match ipv6 address prefix-list anuncio-ggc-v6
+#               
+route-policy RP-GGCv6-EXPORT permit node 150
+ if-match community-filter ANUNCIAR-PARCEIROS-CDN
+#               
+route-policy RP-GGCv6-EXPORT permit node 200
+ if-match community-filter CUSTOMERS
+#               
+route-policy RP-GGCv6-IMPORT deny node 1000
+#               
+route-policy RP-IBGPv6-EXPORT deny node 1000
+#               
+route-policy RP-IBGPv6-IMPORT permit node 100
+ if-match ipv6 address prefix-list PL-IBGPv6-IMPORT
+#               
+route-policy RP-IBGPv6-IMPORT deny node 1000
+#               
+route-policy RP-IMPERANET-EXPORT permit node 100
+ if-match ipv6 address prefix-list anuncio-imperanet-v6
+#               
+route-policy RP-IMPERANET-EXPORT permit node 150
+ if-match community-filter ANUNCIAR-PARCEIROS-CDN
+#               
+route-policy RP-IMPERANET-EXPORT permit node 200
+ if-match community-filter CUSTOMERS
+#               
+route-policy RP-IMPERANET-IMPORT deny node 1000
+#               
+route-policy RP-IMPERANETv6-IN permit node 10
+ if-match ipv6 address prefix-list PL-IMPERANETv6-IN
+#               
+route-policy RP-IMPERANETv6-OUT permit node 10
+ if-match ipv6 address prefix-list PL-MEUBLOCOv6-FULL
+#               
+route-policy RP-NETFLIX-EXPORT deny node 66
+ if-match ip-prefix NEGAR-CDN-OCA
+#               
+route-policy RP-NETFLIX-EXPORT permit node 100
+ if-match ip-prefix PL-MEU-BLOCO-FULL
+#               
+route-policy RP-NETFLIX-EXPORT permit node 150
+ if-match ip-prefix BLOCO-CGNAT
+#               
+route-policy RP-NETFLIX-EXPORT permit node 200
+ if-match community-filter CUSTOMERS
+#               
+route-policy RP-NETFLIX-EXPORT permit node 250
+ if-match community-filter ANUNCIAR-PARCEIROS-CDN
+#               
+route-policy RP-NETFLIX-IMPORT deny node 1000
+#               
+route-policy RP-OCAv6-EXPORT deny node 66
+ if-match ipv6 address prefix-list NEGAR-CDN-OCA
+#               
+route-policy RP-OCAv6-EXPORT permit node 100
+ if-match ipv6 address prefix-list PL-MEUBLOCOv6-FULL
+#               
+route-policy RP-OCAv6-EXPORT permit node 150
+ if-match community-filter ANUNCIAR-PARCEIROS-CDN
+#               
+route-policy RP-OCAv6-EXPORT permit node 200
+ if-match community-filter CUSTOMERS
+#               
+route-policy RP-OCAv6-IMPORT deny node 1000
+#               
+route-policy RP-TRANSITO-CDN-ITZNET-EXPORT permit node 100
+ if-match ip-prefix PL-MEUBLOCO-CDN
+#               
+route-policy RP-TRANSITO-CDN-ITZNET-EXPORT deny node 1000
+#               
+route-policy RP-TRANSITO-CDN-ITZNET-IMPORT permit node 100
+ if-match ip-prefix PL-BLOCOS-ITZNET
+#               
+route-policy RP-TRANSITO-CDN-ITZNET-IMPORT deny node 1000
+#               
+route-policy RP-TRANSITO-CDN-NETFACIL-VIANET-EXPORT permit node 10
+ if-match ip-prefix PL-MEU-BLOCO-FULL
+#               
+route-policy RP-TRANSITO-CDN-NETFACIL-VIANET-EXPORT permit node 100
+ if-match ip-prefix anuncio-cdn-VIANET
+#               
+route-policy RP-TRANSITO-CDN-NETFACIL-VIANET-EXPORT deny node 1000
+#               
+route-policy RP-TRANSITO-CDN-NETFACIL-VIANET-IMPORT permit node 100
+ apply community 64800:10
+#               
+route-policy RP-TRANSITO-CDN-NETFACIL-VIANET-IMPORT deny node 1000
+#               
+route-policy RP-TRANSITO-FLAVIO-EXPORT permit node 100
+ if-match ip-prefix PL-MEU-BLOCO-FULL
+#               
+route-policy RP-TRANSITO-FLAVIO-EXPORT deny node 1000
+#               
+route-policy RP-TRANSITO-FLAVIO-IMPORT permit node 100
+ if-match ip-prefix PL-TRANSITO-FLAVIO
+#               
+route-policy RP-TRANSITO-FLAVIO-IMPORT deny node 1000
+#               
+ip ip-prefix BLOCO-CGNAT index 10 permit 100.80.0.0 19 greater-equal 19 less-equal 24
+ip ip-prefix BLOCOS-CDN-IPV4-OUT index 100 permit 45.167.140.128 26
+ip ip-prefix BLOCOS-CDN-IPV4-OUT index 101 permit 45.167.140.252 30
+ip ip-prefix BLOCOS-CDN-IPV4-OUT index 102 permit 45.167.141.128 26
+ip ip-prefix BLOCOS-CDN-IPV4-OUT index 103 permit 45.167.141.124 30
+ip ip-prefix CLI-CDN-IMPERANET-IPV4-IN index 100 permit 168.197.12.0 22 greater-equal 22 less-equal 24
+ip ip-prefix CLI-CDN-IMPERANET-IPV4-IN index 101 permit 177.52.136.0 22 greater-equal 22 less-equal 24
+ip ip-prefix CLI-CDN-IMPERANET-IPV4-IN index 102 permit 45.165.212.0 22 greater-equal 22 less-equal 24
+ip ip-prefix CLI-CDN-IMPERANET-IPV4-IN index 103 permit 187.62.112.0 22 greater-equal 22 less-equal 24
+ip ip-prefix CLI-CDN-IMPERANET-IPV4-IN index 104 permit 179.49.192.0 22 greater-equal 22 less-equal 24
+ip ip-prefix CLI-CDN-INFOTEC-IPV4-IN index 100 permit 190.180.148.0 22 greater-equal 22 less-equal 24
+ip ip-prefix CLI-CDN-JETZ-IPV4-IN index 100 permit 191.36.136.0 21 greater-equal 21 less-equal 24
+ip ip-prefix CONECT-CDN-IPV4-IN index 100 permit 45.171.252.0 22 greater-equal 22 less-equal 24
+ip ip-prefix CONECT-CDN-IPV4-IN index 101 permit 190.105.196.0 22 greater-equal 22 less-equal 24
+ip ip-prefix CONECT-CDN-IPV4-IN index 102 permit 164.163.220.0 22 greater-equal 22 less-equal 24
+ip ip-prefix CONECT-CDN-IPV4-IN index 103 permit 179.49.184.0 22 greater-equal 22 less-equal 24
+ip ip-prefix NEGAR-CDN-OCA index 300 permit 191.36.136.0 21 greater-equal 21 less-equal 24
+ip ip-prefix PL-BLOCOS-ITZNET index 10 permit 177.52.136.0 22 greater-equal 22 less-equal 24
+ip ip-prefix PL-BLOCOS-VIANET index 10 permit 179.49.184.0 22 greater-equal 22 less-equal 24
+ip ip-prefix PL-BLOCOS-VIANET index 20 permit 177.72.200.0 22 greater-equal 22 less-equal 24
+ip ip-prefix PL-BLOCOS-VIANET index 30 permit 45.171.252.0 22 greater-equal 22 less-equal 24
+ip ip-prefix PL-BLOCOS-VIANET index 40 permit 45.163.100.0 22 greater-equal 22 less-equal 24
+ip ip-prefix PL-BLOCOS-VIANET index 50 permit 189.14.120.0 22 greater-equal 22 less-equal 24
+ip ip-prefix PL-BLOCOS-VIANET index 60 permit 138.99.124.0 22 greater-equal 22 less-equal 24
+ip ip-prefix PL-BLOCOS-VIANET index 70 permit 190.105.196.0 22 greater-equal 22 less-equal 24
+ip ip-prefix PL-BLOCOS-VIANET index 90 permit 177.185.128.0 20 greater-equal 20 less-equal 24
+ip ip-prefix PL-CDN-IMPERANET index 10 permit 45.167.140.0 24
+ip ip-prefix PL-CDN-IMPERANET index 20 permit 45.167.141.0 24
+ip ip-prefix PL-CDN-IMPERANET index 30 permit 45.167.142.0 24
+ip ip-prefix PL-CDN-IMPERANET-IN index 10 permit 168.197.12.0 22 greater-equal 22 less-equal 32
+ip ip-prefix PL-IBGP-OUT index 10 permit 179.49.184.0 22 greater-equal 22 less-equal 24
+ip ip-prefix PL-IBGP-OUT index 11 permit 191.36.136.0 21 greater-equal 21 less-equal 24
+ip ip-prefix PL-MEU-BLOCO-FULL index 10 permit 45.167.140.0 22 greater-equal 22 less-equal 24
+ip ip-prefix PL-MEUBLOCO-CDN index 10 permit 45.167.140.0 24 greater-equal 24 less-equal 24
+ip ip-prefix PL-TRANSITO-FLAVIO index 10 permit 45.189.72.0 22 greater-equal 22 less-equal 24
+ip ip-prefix anuncio-cdn-VIANET index 10 deny 45.167.140.0 24
+ip ip-prefix anuncio-cdn-VIANET index 20 deny 45.167.141.0 24
+ip ip-prefix anuncio-cdn-VIANET index 30 deny 45.167.142.0 24
+ip ip-prefix anuncio-cdn-VIANET index 40 deny 45.167.143.0 24
+ip ip-prefix anuncio-cdn-VIANET index 50 permit 45.167.140.0 23
+ip ip-prefix anuncio-cdn-VIANET index 60 permit 45.167.142.0 23
+ip community-filter basic ANUNCIAR-PARCEIROS-CDN index 10 permit 64800:10
+ip community-filter basic CUSTOMERS index 10 permit 64712:30
+ip community-filter basic NEGAR-CDN index 10 permit 64712:666
+#               
+ip route-static 0.0.0.0 0.0.0.0 100.121.0.1
+ip route-static 45.167.141.128 255.255.255.192 45.167.141.126 description FNA
+ip route-static 108.179.217.143 255.255.255.255 NULL0
+#               
+ipv6 route-static 2804:5698:: 33 NULL0
+ipv6 route-static 2804:5698:8000:: 33 NULL0
+ipv6 route-static 2804:5698:8000:1:: 64 2804:5698:8000::2 description FNA-IPV6
+#               
+ip ipv6-prefix BLOCOS-CDN-IPV6-OUT index 100 permit 2804:5698:100:3:: 64
+ip ipv6-prefix BLOCOS-CDN-IPV6-OUT index 101 permit 2804:5698:100:4:: 64
+ip ipv6-prefix BLOCOS-CDN-IPV6-OUT index 102 permit 2804:5698:8000:1:: 64
+ip ipv6-prefix BLOCOS-CDN-IPV6-OUT index 103 permit 2804:5698:8000:: 126
+ip ipv6-prefix CLI-CDN-IMPERANET-IPV6-IN index 100 permit 2804:3484:: 32 greater-equal 32 less-equal 48
+ip ipv6-prefix CLI-CDN-IMPERANET-IPV6-IN index 101 permit 2804:7664:: 32 greater-equal 32 less-equal 48
+ip ipv6-prefix CLI-CDN-IMPERANET-IPV6-IN index 102 permit 2804:5584:: 32 greater-equal 32 less-equal 48
+ip ipv6-prefix CLI-CDN-IMPERANET-IPV6-IN index 103 permit 2804:68DC:: 32 greater-equal 32 less-equal 48
+ip ipv6-prefix CLI-CDN-IMPERANET-IPV6-IN index 104 permit 2804:78FC:: 32 greater-equal 32 less-equal 48
+ip ipv6-prefix CLI-CDN-INFOTEC-IPV6-IN index 100 permit 2804:17DC:: 32 greater-equal 32 less-equal 48
+ip ipv6-prefix CLI-CDN-JETZ-IPV6-IN index 100 permit 2804:1484:: 32 greater-equal 32 less-equal 48
+ip ipv6-prefix CONECT-CDN-IPV6-IN index 100 permit 2804:59F8:: 32 greater-equal 32 less-equal 128
+ip ipv6-prefix CONECT-CDN-IPV6-IN index 101 permit 2804:7240:: 32 greater-equal 32 less-equal 48
+ip ipv6-prefix CONECT-CDN-IPV6-IN index 102 permit 2804:41C4:: 32 greater-equal 32 less-equal 48
+ip ipv6-prefix CONECT-CDN-IPV6-IN index 103 permit 2804:77D0:: 32 greater-equal 32 less-equal 48
+ip ipv6-prefix CONECT-CDN-IPV6-IN index 104 permit 2804:8590:: 32 greater-equal 32 less-equal 48
+ip ipv6-prefix NEGAR-CDN-OCA index 300 permit 2804:1484:: 32 greater-equal 32 less-equal 34
+ip ipv6-prefix PL-IBGPv6-IMPORT index 10 permit 2804:5698:: 32 greater-equal 32 less-equal 40
+ip ipv6-prefix PL-IMPERANETv6-IN index 10 permit 2804:3484:: 32 greater-equal 32 less-equal 128
+ip ipv6-prefix PL-MEUBLOCOv6-FULL index 10 permit 2804:5698:: 32 greater-equal 32 less-equal 48
+ip ipv6-prefix anuncio-ggc-v6 index 10 permit 2804:5698:: 33
+ip ipv6-prefix anuncio-ggc-v6 index 20 permit 2804:5698:8000:: 33
+ip ipv6-prefix anuncio-imperanet-v6 index 10 permit 2804:5698:: 33
+ip ipv6-prefix anuncio-imperanet-v6 index 20 permit 2804:5698:8000:: 33
+#               
+snmp-agent      
+snmp-agent local-engineid 800007DB052102352D2D101C00038601
+snmp-agent community read cipher %^%#3~9JPgTasYz[*\RvKUU@k&L+E[C#//DOM:JC:,C3@NaB-S^N&LwB/*5zL\$>/xHo;XPXARih5-Ia/j`.%^%# alias __CommunityAliasName_01_45845
+snmp-agent community read cipher %^%#S$W@FvR!:Dos+/6^=hkA-}o.8|n4\AUu~pPV"[:K,c=xI1<1mR96cM*O,>z6^KE,Bh.bzLzv<mWnb)h=%^%# alias MW-SOLUCOES
+#               
+snmp-agent sys-info contact SYSadmin noc@netfacilbandalarga.com.br
+snmp-agent sys-info location Datacenter Netfacil Imperatriz-Ma
+snmp-agent sys-info version v2c v3
+#               
+snmp-agent protocol source-status all-interface
+undo snmp-agent protocol source-status ipv6 all-interface
+#               
+undo snmp-agent proxy protocol source-status all-interface
+undo snmp-agent proxy protocol source-status ipv6 all-interface
+#               
+stelnet server enable
+snetconf server enable
+ssh ipv4 server port 1822
+ssh ipv6 server port 1822
+ssh user nocmonitor
+ssh user nocmonitor authentication-type password
+ssh user nocmonitor service-type stelnet
+ssh server-source all-interface
+ssh ipv6 server-source all-interface
+ssh authorization-type default aaa
+#               
+ssh server cipher aes256_gcm aes128_gcm aes256_ctr aes192_ctr aes128_ctr
+ssh server hmac sha2_512 sha2_256
+ssh server key-exchange dh_group_exchange_sha256 dh_group_exchange_sha1 dh_group14_sha1 ecdh_sha2_nistp256 ecdh_sha2_nistp384 ecdh_sha2_nistp521
+#               
+ssh server publickey ecc rsa rsa_sha2_256 rsa_sha2_512
+#               
+ssh server dh-exchange min-len 3072
+#               
+ssh client publickey ecc rsa rsa_sha2_256 rsa_sha2_512
+#               
+ssh client cipher aes256_gcm aes128_gcm aes256_ctr aes192_ctr aes128_ctr
+ssh client hmac sha2_512 sha2_256
+ssh client key-exchange dh_group_exchange_sha256 dh_group_exchange_sha1 dh_group14_sha1 ecdh_sha2_nistp256 ecdh_sha2_nistp384 ecdh_sha2_nistp521
+#               
+user-interface maximum-vty 21
+#               
+user-interface vty 0 20
+ authentication-mode aaa
+ idle-timeout 35791 0
+ protocol inbound ssh
+#               
+local-aaa-server
+#               
+return          
+<NTF-BNG-ITZ-VS-ADM-CDN>
