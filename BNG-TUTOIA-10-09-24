@@ -1,0 +1,738 @@
+<BNG-TUTOIA-NTF>display current-configuration 
+!Software Version V800R022C00SPC600
+!Last configuration was updated at 2024-09-09 14:39:44-03:00 by netfacil
+!Last configuration was saved at 2024-09-09 14:44:44-03:00
+!kms_feature --
+#
+clock timezone Fortaleza minus 03:00:00
+#
+sysname BNG-TUTOIA-NTF
+#
+pppoe ppp-max-payload enable
+#
+pppoe-server send padt always
+#
+set neid 61ee18
+#
+undo FTP server-source all-interface
+undo FTP ipv6 server-source all-interface
+#
+cpu-defend policy 1
+ car fragment cir 1024 cbs 2048
+ car bfd cir 1024 cbs 2048
+ car bgp cir 1024 cbs 2048
+ car dns-client cir 1024 cbs 2048
+ car icmp cir 1024 cbs 2048
+ car ldp cir 1024 cbs 2048
+ car ntp cir 1024 cbs 2048
+ car ospf cir 1024 cbs 2048
+ car radius cir 1024 cbs 2048
+ car snmp cir 1024 cbs 2048
+ car ssh-client cir 1024 cbs 2048
+ car ssh-server cir 1024 cbs 2048
+ car arp cir 8192
+ car ipv4-fib-miss cir 1024 cbs 2048
+ car ipv4-multicast-fib-miss cir 1024 cbs 2048
+ car ipv4-ttl-expire cir 1024 cbs 2048
+ car ipv6-ttl-expire cir 1024 cbs 2048
+ car ipv6-fib-miss cir 1024 cbs 2048
+ car ipv6-nd-miss cir 1024 cbs 2048
+ car arp-miss cir 1024 cbs 2048
+ car syslog cir 1024 cbs 2048
+ car bgpv6 cir 1024 cbs 2048
+ car ospfv3 cir 1024 cbs 2048
+ car icmpv6 cir 1024 cbs 2048
+ car dnsv6 cir 1024 cbs 2048
+ car sshv6-server cir 1024 cbs 2048
+ car netstream cir 1024 cbs 200
+ car snmpv6 cir 1024 cbs 2048
+ car ra cir 1024 cbs 2048
+ car rs cir 1024 cbs 2048
+ car ns cir 4096
+ car na cir 1024 cbs 2048
+ car icmp-broadcast-address-echo cir 1024 cbs 2048
+#               
+service-template template-default0
+#               
+service-template template-default1
+#               
+service-template template-default2
+#               
+service-template template-default3
+#               
+service-template template-default4
+#               
+ntp-service server disable
+ntp-service ipv6 server disable
+ntp-service server source-interface all disable
+ntp-service ipv6 server source-interface all disable
+ntp-service unicast-peer 200.160.0.8
+ntp-service unicast-server 200.160.0.8 iburst
+ntp-service unicast-server 200.189.40.8
+ntp-service unicast-server 200.192.232.8
+#               
+slot 5          
+ cpu-defend-policy 1
+#               
+ecc peer-public-key 10.200.50.2
+ public-key-code begin
+  047E6AD6 64514B8E 3CDFA687 149B888D C2D2578A A1CD3848 4DDC4211 12C51F8A
+  F34B89CB 43484A0C 6CC7FB5E BA51EB23 9BBBF34C 873312F3 60A48510 FDED61DD
+  CE            
+ public-key-code end
+ peer-public-key end
+#               
+undo icmp name timestamp-reply send
+#               
+router id 10.99.99.0
+#               
+as-notation plain
+#               
+set save-configuration interval 60
+#               
+undo telnet server enable
+undo telnet ipv6 server enable
+undo telnet server-source all-interface
+undo telnet ipv6 server-source all-interface
+#               
+radius-attribute framed-ip-address encapsulation-method version2
+radius-attribute delegated-ipv6-prefix encapsulation-method version2
+#               
+diffserv domain default
+#               
+diffserv domain 5p3d
+#               
+soc             
+#               
+ip vpn-instance __LOCAL_OAM_VPN__
+ ipv4-family    
+ ipv6-family    
+#               
+radius-server group sgp_jaaftecnologia
+ radius-server shared-key-cipher %^%#-N-"")X|L<}'>YY.|YoQ&rK^BtIK.)>y*=/WW#<)A/^U'I_rvPwjoWU,a[8O%^%#
+ radius-server authentication 45.178.142.71 source ip-address 45.167.143.1 2021 weight 0
+ radius-server accounting 45.178.142.71 source ip-address 45.167.143.1 2022 weight 0
+ radius-server retransmit 2 timeout 3
+ radius-server accounting-start-packet resend 3
+ radius-server accounting-stop-packet resend 3
+ radius-server accounting-interim-packet resend 5
+ radius-server source interface LoopBack0
+ radius-server called-station-id include ap-ip account-request
+ radius-server attribute translate
+ radius-server user-name original
+ radius-server user-name trust-server-request 
+ radius-server accounting-stop-packet send force
+ radius-attribute include HW-Auth-Type
+ radius-attribute include Reply-Message coa-nak
+ radius-attribute include edsg-service-name accounting-request
+ radius-attribute include Event-Timestamp accounting-on accounting-off 
+ radius-server format-attribute nas-port-id vendor 2352 
+ radius-attribute translate extend HW-Auth-Type vendor-specific 2011 109 access-request account 
+ radius-attribute assign hw-mng-ipv6 pppoe motm 
+ radius-attribute case-sensitive qos-profile-name
+ radius-attribute apply user-name match user-type ipoe
+ radius-attribute apply framed-ipv6-pool match pool-type
+ radius-attribute service-type value outbound user-type ipoe 
+ radius-attribute include agent-circuit-id value-added-service
+ radius-attribute include agent-remote-id value-added-service
+ radius-attribute hw-user-password simple coa-request
+ radius-server connect-info include refer-option82
+#               
+radius local-ip 45.167.143.1
+undo radius local-ip all
+radius-server authorization error-reply version2
+radius-server authorization 45.178.142.71 destination-port 3799 shared-key-cipher %^%#F]X*IN"ROPhApk<J`Z.!wSYuN(vcnO!Ll)K~'@Z)SoFw=K;C.6,nS$M/k>`T%^%# server-group sgp_jaaftecnologia
+#               
+mpls lsr-id 10.99.99.0
+#               
+mpls            
+ mpls te        
+ mpls rsvp-te   
+ mpls te cspf   
+#               
+mpls l2vpn      
+#               
+mpls ldp        
+ #              
+ ipv4-family    
+#               
+ip pool bloqueio bas local
+ gateway 10.11.111.1 255.255.252.0
+ section 0 10.11.111.2 10.11.111.254
+#               
+ip pool poolv4-cgnat-01 bas local
+ gateway unnumbered interface LoopBack0
+ gateway 100.90.0.1 255.255.240.0
+ section 0 100.90.0.0 100.90.7.255
+#               
+ip pool poolv4-publico bas local
+ gateway unnumbered interface LoopBack0
+ gateway 45.167.143.65 255.255.255.192
+ section 0 45.167.143.64 45.167.143.127
+#               
+dhcp server request-packet all-interface disable
+#               
+ipv6 prefix ipv6-prefix-wan local
+ prefix 2804:5698:980::/48
+#               
+ipv6 prefix ipv6-prefix-pd delegation
+ prefix 2804:5698:940::/44 delegating-prefix-length 56
+ lifetime preferred-lifetime days 1 hours 0 minutes 0 valid-lifetime days 15 hours 0 minutes 0
+ frame-ipv6 lease manage
+ reserved prefix mac lease
+#               
+ipv6 prefix bloqueiov6prefix local
+ prefix 2001:DC8:100::/40
+#               
+ipv6 prefix bloqueiov6pd delegation
+ prefix 2001:DB8:900::/40 delegating-prefix-length 56
+#               
+ipv6 pool bloqueiov6pd bas delegation
+ dns-server 2001:4860:4860::8888
+ prefix bloqueiov6pd
+#               
+ipv6 pool bloqueiov6prefix bas local
+ dns-server 2001:4860:4860::8888
+ prefix bloqueiov6prefix
+#               
+ipv6 pool poolv6-pd bas delegation
+ prefix ipv6-prefix-pd
+#               
+ipv6 pool poolv6-wan bas local
+ prefix ipv6-prefix-wan
+#               
+undo ppp connection chasten
+#               
+dot1x-template 1
+#               
+ipv6-pool statistic include shared-user
+#               
+acl name CGNAT number 3010
+ description CLIENTES-CGNAT
+ rule 5 permit ip source 100.90.0.0 0.0.15.255
+#               
+acl name GERENCIA number 3011
+ description DST-GERENCIA
+ rule 5 permit ip destination 10.0.0.0 0.255.255.255
+ rule 10 permit ip destination 100.64.0.0 0.63.255.255
+ rule 15 permit ip destination 172.16.0.0 0.15.255.255
+ rule 20 permit ip destination 192.168.0.0 0.0.255.255
+#               
+dhcpv6 duid 0001000afeca5e1a5fcafebaba1f
+#               
+traffic classifier TC.CGNAT operator or
+ description IPs-CGNAT
+ if-match acl 3010 precedence 1
+#               
+traffic classifier TC.GERENCIA operator or
+ description DST-GERENCIA
+ if-match acl 3011 precedence 1
+#               
+traffic behavior TB.CGNAT
+ redirect ip-nexthop 172.16.31.17
+ description REDIRECT-CGNAT
+#               
+traffic behavior TB.GERENCIA
+ description TRAFEGO-GER-SEMCGNAT
+#               
+traffic policy CGNAT
+ description PBR-CGNAT
+ share-mode     
+ classifier TC.GERENCIA behavior TB.GERENCIA precedence 5
+ classifier TC.CGNAT behavior TB.CGNAT precedence 10
+#               
+security password
+ #              
+ rule admin     
+  forbidden word changeme_123
+#               
+aaa             
+ ppp username check
+ pure-user-name no-exist-policy online
+ acct-session-id-version version3
+ user-name minimum-length 4
+ user-password password-force-change disable
+ local-user caetano password irreversible-cipher $1d$J!&&Kc`p5G{/GT+O$,>w^H)yMUJR-)SHPnpsJPMc+08,Bw/+^0D~fD(fB$
+ local-user caetano service-type ftp ssh
+ local-user caetano level 3
+ local-user caetano state block fail-times 3 interval 5
+ local-user root password irreversible-cipher $1d$:v4]U<`FO+/D1|1y$TNSW4i{YcViU$F#)v(JRDDZv,1U;(,C24^8:q.b!$
+ local-user root service-type ssh
+ local-user root state block fail-times 3 interval 5
+ local-user root user-group manage-ug
+ local-user root expire 2000-01-01
+ local-user sgpsgp password irreversible-cipher $1d$bf"56D=$MIRD%AN'$1oA[<07%:W:$pKXAK{j<'Cz,0uoCO%b30UN%C66~$
+ local-user sgpsgp service-type telnet ssh snmp
+ local-user sgpsgp level 3
+ local-user sgpsgp state block fail-times 3 interval 5
+ local-user netfacil password irreversible-cipher $1d$@<V("_/t~@5;(s+%$4*fmR_V^R0$I{l,!cXJ&mB@T~O$;)8:+ON2oRE]K$
+ local-user netfacil service-type ssh
+ local-user netfacil level 3
+ local-user netfacil state block fail-times 3 interval 5
+ local-user solintel password irreversible-cipher $1d$"6XT6_g@W@+R=0.1$\wXUAIopR9/F&-.THpDQne@;Ars)I9\c<UR|_0^8$
+ local-user solintel service-type ssh
+ local-user solintel level 3
+ local-user solintel state block fail-times 3 interval 5
+ #              
+ authentication-scheme default0
+ #              
+ authentication-scheme default1
+ #              
+ authentication-scheme default
+  authentication-mode local radius
+ #              
+ authentication-scheme sgp_jaaftecnologia
+  authentication-mode radius local
+ #              
+ authorization-scheme default
+ #              
+ accounting-scheme default0
+ #              
+ accounting-scheme default1
+ #              
+ accounting-scheme sgp_jaaftecnologia
+  accounting interim interval 5
+  accounting send-update
+ #              
+ domain default0
+ #              
+ domain default1
+ #              
+ domain default_admin
+ #              
+ domain sgp_jaaftecnologia
+  authentication-scheme sgp_jaaftecnologia
+  accounting-scheme sgp_jaaftecnologia
+  radius-server group sgp_jaaftecnologia
+  ip-pool poolv4-cgnat-01
+  ipv6-pool poolv6-wan
+  ipv6-pool poolv6-pd
+  dns primary-ip 1.1.1.1
+  dns second-ip 8.8.8.8
+  dns primary-ipv6 2606:4700:4700::1111
+  dns second-ipv6 2001:4860:4860::8888
+  accounting-start-delay 10 online user-type ppp ipoe static
+  user-basic-service-ip-type ipv4
+  ipv6 ppp assign-interfaceid
+  qos rate-limit-mode user-queue inbound
+  qos rate-limit-mode user-queue outbound
+ #              
+ domain bloqueados_sgp_jaaftecnologia
+  authentication-scheme sgp_jaaftecnologia
+  accounting-scheme sgp_jaaftecnologia
+  radius-server group sgp_jaaftecnologia
+  ipv6-pool bloqueiov6prefix
+  ipv6-pool bloqueiov6pd
+  dns primary-ip 8.8.8.8
+  dns second-ip 8.8.4.4
+  dns primary-ipv6 2001:4860:4860::8888
+  dns second-ipv6 2001:4860:4860::8844
+  accounting-start-delay 10 online user-type ppp ipoe static
+  user-basic-service-ip-type ipv4
+  ipv6 ppp assign-interfaceid
+  qos rate-limit-mode user-queue inbound
+  qos rate-limit-mode user-queue outbound
+#               
+license         
+ active port-basic slot 5 card 5 port 0-5,12-13,20-35
+#               
+ospfv3 1        
+ router-id 10.99.99.0
+ silent-interface all
+ undo silent-interface Virtual-Ethernet0/1/11.1014
+ import-route unr
+ preference 110 
+ area 0.0.0.0   
+#               
+interface Ethernet0/0/0
+ speed auto     
+ duplex auto    
+ undo shutdown  
+ ip binding vpn-instance __LOCAL_OAM_VPN__
+ ip address 192.168.0.1 255.255.255.0
+#               
+interface Virtual-Template0
+ ppp authentication-mode auto
+#               
+interface Virtual-Template1
+ ppp authentication-mode pap chap mschapv1 mschapv2
+ ppp mru 1500   
+ pppoe-server service-name-parameter ISP-NETFACIL
+ pppoe-server ac-name NETFACIL
+ tcp adjust-mss 1420
+ ip urpf strict enable check subnet
+ ipv6 urpf strict enable check subnet
+#               
+interface GigabitEthernet0/5/4
+ undo shutdown  
+ undo dcn       
+#               
+interface GigabitEthernet0/5/5
+ undo shutdown  
+ undo dcn       
+#               
+interface GigabitEthernet0/5/6
+ undo shutdown  
+ undo dcn       
+#               
+interface GigabitEthernet0/5/7
+ undo shutdown  
+ undo dcn       
+#               
+interface GigabitEthernet0/5/8
+ undo shutdown  
+ undo dcn       
+#               
+interface GigabitEthernet0/5/9
+ undo shutdown  
+ undo dcn       
+#               
+interface GigabitEthernet0/5/10
+ undo shutdown  
+ undo dcn       
+#               
+interface GigabitEthernet0/5/11
+ undo shutdown  
+ undo dcn       
+#               
+interface GigabitEthernet0/5/12
+ undo shutdown  
+ undo dcn       
+#               
+interface GigabitEthernet0/5/13
+ undo shutdown  
+ undo dcn       
+#               
+interface GigabitEthernet0/5/14
+ undo shutdown  
+ undo dcn       
+#               
+interface GigabitEthernet0/5/15
+ undo shutdown  
+ undo dcn       
+#               
+interface GigabitEthernet0/5/16
+ undo shutdown  
+ undo dcn       
+#               
+interface GigabitEthernet0/5/17
+ undo shutdown  
+ undo dcn       
+#               
+interface GigabitEthernet0/5/18
+ undo shutdown  
+ undo dcn       
+#               
+interface GigabitEthernet0/5/19
+ undo shutdown  
+ undo dcn       
+#               
+interface 25GE0/5/20
+ undo shutdown  
+ undo dcn       
+#               
+interface 25GE0/5/20.2001
+ vlan-type dot1q 2001
+ description MGMT-OLT-ZTE
+ ip address 10.200.50.1 255.255.255.252
+ statistic enable
+ ospf enable 1 area 0.0.0.0
+#               
+interface 25GE0/5/20.20101
+ description PPPOE-FH-TUTOIA
+ ipv6 enable    
+ ipv6 address auto link-local
+ statistic enable
+ 8021p 0        
+ user-vlan 101 116
+ user-vlan 201 216
+ pppoe-server bind Virtual-Template 1
+ bas            
+ #              
+  access-type layer2-subscriber default-domain authentication force sgp_jaaftecnologia
+ #              
+#               
+interface 25GE0/5/21
+ undo shutdown  
+ undo dcn       
+#               
+interface 25GE0/5/22
+ description CGNAT
+ undo shutdown  
+ undo dcn       
+#               
+interface 25GE0/5/22.4000
+ vlan-type dot1q 4000
+#               
+interface 25GE0/5/22.4001
+ vlan-type dot1q 4001
+ description UPLINK-PBR
+ ip address 172.16.31.18 255.255.255.252
+ statistic enable
+ ospf network-type p2p
+ ospf enable 1 area 0.0.0.0
+#               
+interface 25GE0/5/23
+ undo shutdown  
+ undo dcn       
+#               
+interface 25GE0/5/24
+ undo shutdown  
+ undo dcn       
+#               
+interface 25GE0/5/25
+ undo shutdown  
+ undo dcn       
+#               
+interface 25GE0/5/26
+ undo shutdown  
+ undo dcn       
+#               
+interface 25GE0/5/27
+ undo shutdown  
+ undo dcn       
+#               
+interface 25GE0/5/28
+ undo shutdown  
+ undo dcn       
+#               
+interface 25GE0/5/29
+ undo shutdown  
+ undo dcn       
+#               
+interface 25GE0/5/30
+ undo shutdown  
+ undo dcn       
+#               
+interface 25GE0/5/31
+ undo shutdown  
+ undo dcn       
+#               
+interface 25GE0/5/31.3100
+ vlan-type dot1q 3100
+#               
+interface 25GE0/5/32
+ undo shutdown  
+ undo dcn       
+#               
+interface 25GE0/5/33
+ undo shutdown  
+ undo dcn       
+#               
+interface 25GE0/5/34
+ description IPT-STAR1
+ undo shutdown  
+ undo dcn       
+ statistic enable
+#               
+interface 25GE0/5/34.2710
+ vlan-type dot1q 2710
+#               
+interface 25GE0/5/35
+ description IPT-MEGALINK
+ undo shutdown  
+ undo dcn       
+ statistic enable
+#               
+interface 25GE0/5/35.2610
+ vlan-type dot1q 2610
+#               
+interface 25GE0/5/35.2611
+ vlan-type dot1q 2611
+#               
+interface 100GE0/5/0
+ undo shutdown  
+ undo dcn       
+#               
+interface 100GE0/5/1
+ undo shutdown  
+ undo dcn       
+#               
+interface 100GE0/5/2
+ undo shutdown  
+ undo dcn       
+#               
+interface 100GE0/5/3
+ undo shutdown  
+ undo dcn       
+#               
+interface LoopBack0
+ ipv6 enable    
+ ip address 10.99.99.0 255.255.255.255
+ ip address 45.167.143.1 255.255.255.255 sub
+ ospf enable 1 area 0.0.0.0
+ binding tunnel gre
+#               
+interface LoopBack1
+#               
+interface Virtual-Ethernet0/1/1
+ ve-group 1 l2-terminate
+#               
+interface Virtual-Ethernet0/1/1.1014
+ vlan-type dot1q 1014
+#               
+interface Virtual-Ethernet0/1/11
+ ve-group 1 l3-access
+ mac-address 10ab-2611-cafe
+#               
+interface Virtual-Ethernet0/1/11.1014
+ vlan-type dot1q 1014
+ description INTERVS
+ ipv6 enable    
+ ip address 10.99.100.2 255.255.255.252
+ ipv6 address auto link-local
+ statistic enable
+ ospfv3 1 area 0.0.0.0
+ ospfv3 network-type p2p
+ ospf network-type p2p
+ ospf enable 1 area 0.0.0.0
+#               
+interface Virtual-Ethernet0/2/2
+ ve-group 2 l2-terminate
+#               
+interface Virtual-Ethernet0/2/2.1014
+ vlan-type dot1q 1014
+#               
+interface Virtual-Ethernet0/2/21
+ ve-group 2 l3-access
+ mac-address 20ab-2611-cafe
+#               
+interface Virtual-Ethernet0/2/21.1014
+ vlan-type dot1q 1014
+#               
+interface Tunnel727
+ description SGP-GRE
+ ip address 172.31.255.254 255.255.255.252
+ tunnel-protocol gre
+ source 45.167.143.1
+ destination 45.178.142.71
+#               
+interface NULL0 
+#               
+radius-server source interface LoopBack0
+#               
+ccc PTP-INTERVS interface Virtual-Ethernet0/1/1.1014 tagged out-interface Virtual-Ethernet0/2/2.1014 tagged
+#               
+ospf 1 router-id 10.99.99.0
+ import-route direct
+ import-route static
+ import-route unr
+ silent-interface all
+ undo silent-interface Virtual-Ethernet0/1/11.1014
+ undo silent-interface 25GE0/5/22.4001
+ preference 110 
+ opaque-capability enable
+ area 0.0.0.0   
+#               
+undo dcn        
+#               
+ip community-filter advanced ZERAR-COMUNIDADES index 10 permit 26801:*
+#               
+snmp-agent      
+snmp-agent local-engineid 800007DB03B00875836026
+snmp-agent community read cipher %^%#r^y4U]6U@BjdYY,{"f(MIP-GBfe6cMDA4p5}V/!6dFxL<|8#HC6O)BWi|42Qdv~T)[8iSX`[To06iWfE%^%# alias __CommunityAliasName_01_8394
+snmp-agent community read cipher %^%#gj},69pKf(X[GWMRz5G6V8{9X;}7VH$78ZED:m-Bi9M-.zU"yT@W.^%z&D<4sgE=0]_6zOY*>kC\fN!*%^%# alias __CommunityAliasName_02_31258
+#               
+snmp-agent sys-info contact noc@noketelecom.com.br
+snmp-agent sys-info location -5.512965367246291, -47.470736782125705
+snmp-agent sys-info version v2c v3
+snmp-agent community complexity-check disable
+#               
+snmp-agent udp-port 2161
+#               
+snmp-agent protocol source-status all-interface
+snmp-agent protocol source-status ipv6 all-interface
+#               
+undo snmp-agent proxy protocol source-status all-interface
+undo snmp-agent proxy protocol source-status ipv6 all-interface
+#               
+lldp enable     
+#               
+undo web-auth-server source-ip all
+#               
+undo web-auth-server source-ipv6 all
+#               
+stelnet server enable
+snetconf server enable
+ssh server rsa-key min-length 3072
+ssh ipv4 server port 1822
+ssh ipv6 server port 1822
+ssh user caetano
+ssh user caetano authentication-type password
+ssh user caetano service-type all
+ssh user netfacil
+ssh user netfacil authentication-type all
+ssh user netfacil service-type stelnet
+ssh user root   
+ssh user root authentication-type password
+ssh user root service-type snetconf stelnet
+ssh user sgpsgp 
+ssh user sgpsgp authentication-type password
+ssh user sgpsgp service-type all
+ssh server-source -i Ethernet0/0/0
+ssh server-source all-interface
+ssh ipv6 server-source all-interface
+ssh authorization-type default aaa
+#               
+ssh server cipher aes256_gcm aes128_gcm aes256_ctr aes192_ctr aes128_ctr
+ssh server hmac sha2_512 sha2_256
+ssh server key-exchange dh_group_exchange_sha256 dh_group_exchange_sha1 dh_group14_sha1 ecdh_sha2_nistp256 ecdh_sha2_nistp384 ecdh_sha2_nistp521
+#               
+ssh server publickey ecc rsa rsa_sha2_256 rsa_sha2_512
+#               
+ssh server dh-exchange min-len 3072
+#               
+ssh client first-time enable
+ssh client peer 10.200.50.2 assign ecc-key 10.200.50.2
+#               
+ssh client publickey ecc rsa rsa_sha2_256 rsa_sha2_512
+#               
+ssh client cipher aes256_gcm aes128_gcm aes256_ctr aes192_ctr aes128_ctr
+ssh client hmac sha2_512 sha2_256
+ssh client key-exchange dh_group_exchange_sha256 dh_group_exchange_sha1 dh_group14_sha1 ecdh_sha2_nistp256 ecdh_sha2_nistp384 ecdh_sha2_nistp521
+#               
+traffic-policy CGNAT inbound global-acl
+#               
+user-interface maximum-vty 21
+#               
+user-interface con 0
+#               
+user-interface vty 0 4
+ authentication-mode aaa
+ user privilege level 3
+ idle-timeout 35791 0
+ protocol inbound ssh
+#               
+netconf         
+ activate module huawei-ip
+#               
+local-aaa-server
+#               
+pki domain default
+#               
+admin           
+ combined-sysname disable
+ virtual-system VS-BGP pvmb slot 5
+  port-mode port
+  resource u4route upper-limit 1048576
+  resource m4route upper-limit 2000
+  resource u6route upper-limit 1048576
+  resource m6route upper-limit 512
+  resource vpn-instance upper-limit 512
+  resource cpu weight 5
+  assign interface 25GE0/5/22.4000
+  assign interface 25GE0/5/34.2710
+  assign interface 25GE0/5/35.2610
+  assign interface 25GE0/5/35.2611
+  assign interface Virtual-Ethernet0/2/21.1014
+#               
+l2tp-group default-lac
+ tunnel name HUAWEI
+#               
+l2tp-group default-lns
+ tunnel name HUAWEI
+#               
+warranty        
+#               
+return          
+<BNG-TUTOIA-NTF>
