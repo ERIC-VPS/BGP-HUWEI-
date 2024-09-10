@@ -1,0 +1,1763 @@
+<NTF-BNG-ITZ-VS-ADM>display current-configuration 
+2024-09-10 14:21:19.882 -03:00
+!Software Version V800R012C10SPC300
+!Last configuration was updated at 2024-08-31 15:36:45-03:00 by nokenetfacil
+!Last configuration was saved at 2024-08-31 15:41:45-03:00
+#
+clock timezone Fortaleza minus 03:00:00
+#
+sysname NTF-BNG-ITZ-VS-ADM
+#
+set neid 70cacc
+#
+undo FTP server-source all-interface
+undo FTP ipv6 server-source all-interface
+#
+info-center channel 6 name logfull
+info-center source default channel 6 log level notification trap level error debug level informational
+info-center loghost source LoopBack0
+info-center loghost 192.168.254.20 facility local2
+#
+cpu-defend policy 1
+ car arp cir 4096
+ car ns cir 2048
+#
+service-template template-default0
+#               
+service-template template-default1
+#               
+service-template template-default2
+#               
+service-template template-default3
+#               
+service-template template-default4
+#               
+ntp-service server disable
+ntp-service ipv6 server disable
+ntp-service server source-interface all disable
+ntp-service ipv6 server source-interface all disable
+ntp-service unicast-peer 10.33.33.18
+ntp-service unicast-peer 200.160.0.8
+#               
+slot 9          
+ ip netstream sampler to slot self
+ ipv6 netstream sampler to slot self
+ cpu-defend-policy 1
+#               
+ecc peer-public-key 10.33.33.46
+ public-key-code begin
+  04E063FB F46BD406 A0586195 89197AD3 F2FBDFFA 1D48DEC4 30B12A6E C9A5EFB1
+  B408EF18 684F3FB3 DB6CB125 5AE60A44 EEF0937C 9DB89B01 1BB3A6A8 B1960448
+  CD            
+ public-key-code end
+ peer-public-key end
+#               
+ecc peer-public-key 10.66.66.26
+ public-key-code begin
+  04016588 2C39DC7C 54823C2A ED2F5CB0 D2600150 117415CD C0BDAA91 548B7D61
+  98D74113 80E4A87B 522FED37 B6121527 DF6E6FEC FCE300DB C3602121 6B6DFF0A
+  C05C3500 17503164 DB61A4A4 5FCDEE41 C0285FC5 6C3CA108 292142EB 2673612D
+  668CC1DF 2ADE7292 1C7C630C 61C6C686 11B0C7BC 1D2E3347 6A3CC9C7 57F3D30F
+  EDB921CA 4E   
+ public-key-code end
+ peer-public-key end
+#               
+ecc peer-public-key 10.99.99.21
+ public-key-code begin
+  0401A64E 4C7B5B97 1D070D82 F5C20C5E 03B8F5D2 FDFF2F54 AE1E845A F01E7B17
+  C65BA193 F99A0782 D0A01149 F34825D9 FE801B93 5BD18543 CCCBFC73 4E4BFB3F
+  AAAC5101 9F7407DC 322E9262 4355813D A93BF3D4 2343640A 30BDF792 32744706
+  B093A0B7 BD78C058 DAACF6F8 4AAA0EB7 E54C37CF 19F75769 0A07381B 5CD75241
+  46062D28 DC   
+ public-key-code end
+ peer-public-key end
+#               
+ecc peer-public-key 10.99.99.22
+ public-key-code begin
+  0400A4B9 37EE9164 3ED5DF1F 773A047B 3371C2DF BA3F9099 68B27213 D16BB14E
+  2E647ACF 88E6002A 4C784BCC EE4816D0 BCE7E09E D63A86C8 3F5BDFDA 4236C294
+  C21F3100 EA4A1B12 105AD13C 53AA078C 9525BFF4 04A44EAA CAE6257E 560D5C28
+  89230A1C 2BC2AFA2 B234DCFF 3B31B150 3877AB04 E78202AA 5ED1B697 B2AC52DD
+  29781A46 10   
+ public-key-code end
+ peer-public-key end
+#               
+ecc peer-public-key 10.99.99.25
+ public-key-code begin
+  040019F4 4EA6F9B2 F546ED54 88F0B4EC CC30C048 88A79507 5595EC68 946EBCDC
+  7746E13A B98954C4 50C503A4 7E584A64 8F08A25E 81439CC2 9EBBFFE4 30D554E0
+  E77A8D01 A28F1F36 E04B22C3 37E2CCBA 8069BE43 272DB6DA 87381CCB 3B7B835B
+  C503F198 94AC0758 6A303F0C 25F094E6 DFB13026 A278EEE0 0B8EA933 367B3FD1
+  BB7D3C85 1B   
+ public-key-code end
+ peer-public-key end
+#               
+ecc peer-public-key 10.99.99.28
+ public-key-code begin
+  0400325C F9AFEFF3 67845816 090E5DF9 135EF43B 620EAD3E B36A900C 899295EE
+  DC157E7C 28CC5A62 23998FB2 45D5A857 DA62C19F 76FFF8D2 0187ADBF FCED9353
+  4B456101 77DD62E7 184B466E 4391F88D B8ECD0A8 DBD759F0 C4C880B6 A1BE3AE7
+  13202533 295772D0 D649F3DC 0387907D 0F73A8B8 011815E6 AED2F559 3887F9E7
+  EA6D11D1 03   
+ public-key-code end
+ peer-public-key end
+#               
+ecc peer-public-key 10.99.99.29
+ public-key-code begin
+  04004807 4DD6C45E 43C92DF7 45A9E41C 4D0C1907 9645944A 7810E14A 3862B21A
+  CA70BE85 1B8976DD 7AEF6B29 9CAA7FA1 5DC6117B 9432EB6A 578865AC 396EB529
+  60915E01 BA7108FA 2B94C895 B31CAE34 9D413C7B C0D3B9A2 12E613F0 43354F90
+  844E7B7C 062AE062 F5FE0D2F 20EB33B9 709FB714 BBBC0BEC B2F5F25A 8D0626A4
+  FDB5C2B8 30   
+ public-key-code end
+ peer-public-key end
+#               
+ecc peer-public-key 10.99.99.30
+ public-key-code begin
+  0401B258 F2227A61 B5F122E9 0938EDCF E3A11A3B A055A17A 53F2ED95 E84CB51A
+  A8C0A98E 47BDD431 2CCF4CCB A6E3A78B ECE5DB0D 7BC0992E B9BA86EF 135A3652
+  27BB2A00 ABCF22B0 46399BA5 3C61E9BE DA4AEEDE 5B54A535 F316B21F 3448286B
+  BAD810D0 1EAE9233 18A40B48 99AA11AA 4A333F6D B0EFFF0E 580F587B 140C43A7
+  D41F496F 2C   
+ public-key-code end
+ peer-public-key end
+#               
+ecc peer-public-key 10.99.99.33
+ public-key-code begin
+  0401A9CA 57183BFE 32E81F65 2F2EC5B4 5E240111 8A75085F 678BE80A B1FCB649
+  695FF315 F614B117 09C7E3B2 AF96FABA 4B5E9E17 750FCA2F 4E0A9D1C A1905C38
+  F290FE01 F8847687 1CD9A238 46D7156E 8E2CAA44 75FEAE67 F19A3306 5446489C
+  778A2047 18EA57BC 26150971 5C7A23B0 A45634E1 4B73D496 AF590F1D BC8BB49F
+  A97094E0 B2   
+ public-key-code end
+ peer-public-key end
+#               
+ecc peer-public-key 45.167.140.1
+ public-key-code begin
+  04A3E447 99D53013 3767EE58 C6A9D1C0 AFC2B68C AAF13EF2 44608ADD 64980635
+  C9CE9E27 03392553 9497E119 3B180BA2 F07E94A2 80A6E3E3 19D19A46 BF89E396
+  0B            
+ public-key-code end
+ peer-public-key end
+#               
+undo icmp name timestamp-reply send
+#               
+router id 10.99.99.0
+#               
+as-notation plain
+#               
+set save-configuration interval 60
+#               
+undo telnet server enable
+undo telnet ipv6 server enable
+undo telnet server-source all-interface
+undo telnet ipv6 server-source all-interface
+#               
+diffserv domain default
+#               
+diffserv domain 5p3d
+#               
+soc             
+#               
+ip vpn-instance __LOCAL_OAM_VPN__
+ ipv4-family    
+ ipv6-family    
+#               
+undo radius local-ip all
+#               
+pnp default route 192.168.188.1 vpn-instance __LOCAL_OAM_VPN__
+#               
+mpls lsr-id 10.99.99.0
+#               
+mpls            
+ mpls te        
+ mpls rsvp-te   
+ mpls te cspf   
+#               
+mpls l2vpn      
+#               
+mpls ldp        
+ #              
+ ipv4-family    
+#               
+dhcp server request-packet all-interface disable
+#               
+dot1x-template 1
+#               
+acl number 2000 
+ description SNMP-DROP
+ rule 4 permit source 195.201.0.0 0.0.255.255
+ rule 5 permit source 45.167.140.0 0.0.3.255
+ rule 6 permit source 88.99.0.0 0.0.255.255
+ rule 7 permit source 54.233.176.245 0
+ rule 8 permit source 10.0.0.0 0.255.255.255
+ rule 9 permit source 18.231.191.27 0
+ rule 10 permit source 192.168.255.0 0.0.0.255
+ rule 11 permit source 10.192.0.0 0.0.255.255
+ rule 12 permit source 185.218.126.3 0
+ rule 13 permit source 173.249.42.144 0
+ rule 14 permit source 172.17.10.2 0
+ rule 100 deny  
+#               
+acl ipv6 number 2000
+ rule 10 permit source 2804:5698::/32
+ rule 20 deny   
+#               
+acl ipv6 number 2001
+ description SNMP-DROP-v6
+ rule 10 permit source 2804:5698::/32
+ rule 20 deny   
+#               
+security password
+ #              
+ rule admin     
+  forbidden word changeme_123
+#               
+aaa             
+ local-user solintel password irreversible-cipher $1c$hwD;OH[O[:$W)2{0NCDc7)XDW.G_XGAo=:I+H=A#F>S2o04g5j5$
+ local-user solintel service-type ftp terminal telnet ssh http
+ local-user solintel level 3
+ local-user solintel state block fail-times 3 interval 5
+ local-user noc@netfacil password irreversible-cipher $1c$TMZ]1!DI)W$x,Hk=dy7;RK7kn9}q+PAkI/\!nh~0Q4sPw$91F."$
+ local-user noc@netfacil service-type ssh
+ local-user noc@netfacil level 3
+ local-user noc@netfacil state block fail-times 3 interval 5
+ local-user nocnetfacil password irreversible-cipher $1c$Tn9YT3"hI%$s<b**QZeX2qm$},3USn=T^Xo=3IzN=ZOXaQYF8HA$
+ local-user nocnetfacil service-type terminal telnet ssh
+ local-user nocnetfacil level 3
+ local-user nocnetfacil state block fail-times 3 interval 5
+ local-user nokenetfacil password irreversible-cipher $1c$/u<,-h00DF$fhkA*=/7=P,xrJ6c!'->PVVk3uWpf1-u^)YhpI#"$
+ local-user nokenetfacil service-type terminal telnet ssh
+ local-user nokenetfacil level 3
+ local-user nokenetfacil state block fail-times 3 interval 5
+ local-user netfacil@noc password irreversible-cipher $1c$TVBJFR`Hi+$p_@P"LVc~Vzhz@8el-PBv<6L=+hiIOa92:9C(HpN$
+ local-user netfacil@noc service-type terminal telnet ssh
+ local-user netfacil@noc level 3
+ local-user netfacil@noc state block fail-times 3 interval 5
+ local-user netfacilnoc password irreversible-cipher $1c$$o'fNi(<]6$qX8B4@y)K<^hd.A.A_$6uqNdT{Y]K:]=B[3)R).%$
+ local-user netfacilnoc service-type ssh
+ local-user netfacilnoc level 3
+ local-user netfacilnoc state block fail-times 3 interval 5
+ local-user caetano password irreversible-cipher $1c$yRpU1k}e0W$4^55;|>a_+B`>)',-FoA3GV+Cmg:w9-IL04mIoxU$
+ local-user caetano service-type ftp ssh
+ local-user caetano level 3
+ local-user caetano state block fail-times 3 interval 5
+ #              
+ authentication-scheme default0
+ #              
+ authentication-scheme default1
+ #              
+ authentication-scheme default
+  authentication-mode local radius
+ #              
+ authorization-scheme default
+ #              
+ accounting-scheme default0
+ #              
+ accounting-scheme default1
+ #              
+ domain default0
+ #              
+ domain default1
+ #              
+ domain default_admin
+#               
+license         
+#               
+ospfv3 1        
+ router-id 10.99.99.0
+ import-route direct
+ import-route static
+ default-route-advertise always
+ area 0.0.0.0   
+#               
+interface Eth-Trunk1
+ description TO-SW6730-CORE
+ mac-address b008-7583-603a
+ mode lacp-static
+ statistic enable
+#               
+interface Eth-Trunk1.2
+ vlan-type dot1q 2
+ description [WAN]IP-TRANSITO-EMBRATEL
+ shutdown       
+ ipv6 enable    
+ ip address 200.247.93.2 255.255.255.252
+ ipv6 address 2804:A8:2:9A::DD2/64
+ statistic enable
+ ip netstream inbound
+ ip netstream outbound
+ ipv6 netstream inbound
+ ipv6 netstream outbound
+ binding tunnel gre
+#               
+interface Eth-Trunk1.11
+ vlan-type dot1q 11
+ description [LAN]CCR-IDMZ
+ ipv6 enable    
+ ipv6 address 2804:5698:100:5::1/64
+ statistic enable
+ ospfv3 1 area 0.0.0.0
+ ospfv3 network-type p2p
+ ospf network-type p2p
+ ospf enable 1 area 0.0.0.0
+ ip netstream inbound
+ ipv6 netstream inbound
+#               
+interface Eth-Trunk1.32
+ vlan-type dot1q 32
+#               
+interface Eth-Trunk1.103
+ vlan-type dot1q 103
+ description [WAN]IP-TRANSITO-WIKITELECOM
+ shutdown       
+ ipv6 enable    
+ ip address 167.249.171.227 255.255.255.254
+ ipv6 address 2804:2BE0:210::215:402/120
+ statistic enable
+ ip netstream inbound
+ ip netstream outbound
+ ipv6 netstream inbound
+ ipv6 netstream outbound
+#               
+interface Eth-Trunk1.201
+ description [WAN]QinQ-WIKI-TUTOIA-MA
+ ip address 172.20.0.1 255.255.255.252
+ statistic enable
+ encapsulation qinq-termination
+ qinq termination pe-vid 201 ce-vid 1500
+ ip netstream inbound
+ ipv6 netstream inbound
+#               
+interface Eth-Trunk1.648
+ vlan-type dot1q 648
+#               
+interface Eth-Trunk1.667
+ vlan-type dot1q 667
+#               
+interface Eth-Trunk1.668
+ vlan-type dot1q 668
+ description INFOTEC-2GB
+ ipv6 enable    
+ ip address 172.21.0.5 255.255.255.252
+ ipv6 address 2804:5698:8001::19/126
+ statistic enable
+ ip netstream inbound
+ ip netstream outbound
+ ipv6 netstream inbound
+ ipv6 netstream outbound
+ qos car cir 5000000 cbs 18700000 green pass red discard inbound
+ qos car cir 5000000 cbs 18700000 green pass red discard outbound
+#               
+interface Eth-Trunk1.1005
+ vlan-type dot1q 1005
+ description TO-NE40-BRAS
+ ip address 10.66.66.25 255.255.255.252
+ statistic enable
+ ospf network-type p2p
+ ospf enable 1 area 0.0.0.0
+ ip netstream inbound
+ ipv6 netstream inbound
+#               
+interface Eth-Trunk1.1006
+ vlan-type dot1q 1006
+ description TO-V6-ONLY-CE-NE40
+ ipv6 enable    
+ ipv6 address 2804:5698:100:2::1/64
+ statistic enable
+ ospfv3 1 area 0.0.0.0
+ ospfv3 network-type p2p
+ ip netstream inbound
+ ipv6 netstream inbound
+#               
+interface Eth-Trunk1.1007
+ vlan-type dot1q 1007
+ description TO-CGNAT-CCR
+ ip address 10.66.66.33 255.255.255.252
+ statistic enable
+ ospf network-type p2p
+ ospf enable 1 area 0.0.0.0
+ ip netstream inbound
+ ipv6 netstream inbound
+#               
+interface Eth-Trunk1.1168
+ vlan-type dot1q 1168
+#               
+interface Eth-Trunk1.1169
+ vlan-type dot1q 1169
+#               
+interface Eth-Trunk1.1630
+ vlan-type dot1q 1630
+ bandwidth 100000
+ description [WAN] IP-JUPITER
+ ipv6 enable    
+ ip address 172.16.13.6 255.255.255.252
+ ipv6 address 2804:C2C:0:1:172:1613:4:2/126
+ statistic enable
+ ip netstream inbound
+ ip netstream outbound
+ ipv6 netstream inbound
+ ipv6 netstream outbound
+ binding tunnel gre
+#               
+interface Eth-Trunk1.1632
+ vlan-type dot1q 1632
+ description [WAN]IX-CE-V4
+ shutdown       
+ ip address 45.184.145.237 255.255.252.0
+ statistic enable
+ ip netstream inbound
+ ip netstream outbound
+ ipv6 netstream inbound
+ ipv6 netstream outbound
+#               
+interface Eth-Trunk1.1633
+ vlan-type dot1q 1633
+ description [WAN]IX-CE-V6
+ shutdown       
+ ipv6 enable    
+ ipv6 address 2001:12F8:0:9::145:237/64
+ statistic enable
+ ip netstream inbound
+ ip netstream outbound
+ ipv6 netstream inbound
+ ipv6 netstream outbound
+#               
+interface Eth-Trunk1.2004
+ vlan-type dot1q 2004
+ description [WAN]SWAP-IMPERANET
+ ip address 172.16.18.14 255.255.255.252
+ statistic enable
+ ip netstream inbound
+ ipv6 netstream inbound
+ ip urpf loose allow-default statistics enable
+ ipv6 urpf loose allow-default statistics enable
+#               
+interface Eth-Trunk1.2452
+ vlan-type dot1q 2452
+#               
+interface Eth-Trunk1.2453
+ vlan-type dot1q 2453
+#               
+interface Eth-Trunk1.2464
+ vlan-type dot1q 2464
+#               
+interface Eth-Trunk1.2465
+ vlan-type dot1q 2465
+#               
+interface Eth-Trunk1.2479
+ vlan-type dot1q 2479
+#               
+interface Eth-Trunk1.2480
+ vlan-type dot1q 2480
+#               
+interface Eth-Trunk1.2716
+ vlan-type dot1q 2716
+#               
+interface Eth-Trunk1.2717
+ vlan-type dot1q 2717
+#               
+interface Eth-Trunk1.2905
+ vlan-type dot1q 2905
+#               
+interface Eth-Trunk1.2906
+ vlan-type dot1q 2906
+#               
+interface Eth-Trunk1.3000
+ vlan-type dot1q 3000
+ description TESTE PROVEDOR
+ statistic enable
+ qos car cir 100000 cbs 18700000 green pass red discard inbound
+ qos car cir 100000 cbs 18700000 green pass red discard outbound
+ ip urpf strict allow-default statistics enable
+ ipv6 urpf strict allow-default statistics enable
+#               
+interface Eth-Trunk1.3090
+ vlan-type dot1q 3090
+#               
+interface Eth-Trunk1.3102
+ vlan-type dot1q 3102
+#               
+interface Eth-Trunk1.3210
+ vlan-type dot1q 3210
+ description [WAN] IP-TRANSITO-VIANET
+ ipv6 enable    
+ ip address 10.88.88.42 255.255.255.252
+ ipv6 address FD00:2000::2/64
+ statistic enable
+ ip netstream inbound
+ ip netstream outbound
+ ipv6 netstream inbound
+ ipv6 netstream outbound
+#               
+interface Eth-Trunk1.3300
+ vlan-type dot1q 3300
+#               
+interface Eth-Trunk1.3400
+ vlan-type dot1q 3400
+#               
+interface Eth-Trunk1.3402
+ vlan-type dot1q 3402
+ description [WAN]IX-SP-VIA-VIANET
+ ipv6 enable    
+ ip address 10.90.88.10 255.255.255.252
+ ipv6 address FD00:2F00::2/64
+ statistic enable
+ ip netstream inbound
+ ip netstream outbound
+ ipv6 netstream inbound
+ ipv6 netstream outbound
+#               
+interface Eth-Trunk1.3410
+ vlan-type dot1q 3410
+#               
+interface Eth-Trunk1.3700
+ vlan-type dot1q 3700
+#               
+interface Eth-Trunk1.3904
+ vlan-type dot1q 3904
+#               
+interface Eth-Trunk1.4000
+ vlan-type dot1q 4000
+ description [LAN]SW-HUAWEI
+ ipv6 enable    
+ ip address 10.88.88.73 255.255.255.252
+ ipv6 address auto link-local
+ statistic enable
+ ospfv3 1 area 0.0.0.0
+ ospfv3 network-type p2p
+ ospf network-type p2p
+ ospf enable 1 area 0.0.0.0
+ ip netstream inbound
+ ipv6 netstream inbound
+#               
+interface Eth-Trunk3
+ description TO-S6730-02-CORE
+ statistic enable
+#               
+interface Eth-Trunk3.16
+ vlan-type dot1q 16
+ description [LAN]S6730-02-CORE
+ ipv6 enable    
+ ip address 10.99.101.9 255.255.255.248
+ ipv6 address auto link-local
+ statistic enable
+ ospfv3 1 area 0.0.0.0
+ ospfv3 network-type p2p
+ ospf network-type p2p
+ ospf enable 1 area 0.0.0.0
+ ip netstream inbound
+ ipv6 netstream inbound
+#               
+interface Eth-Trunk3.350
+ vlan-type dot1q 350
+ description NFWARE-WAN
+ ip address 10.66.66.37 255.255.255.252
+#               
+interface Ethernet0/0/0
+ speed auto     
+ duplex auto    
+ undo shutdown  
+ ip binding vpn-instance __LOCAL_OAM_VPN__
+#               
+interface Virtual-Template0
+ ppp authentication-mode auto
+#               
+interface GigabitEthernet0/4/0
+ description PVE-S02-VMS-PROXMOX
+ undo shutdown  
+ ipv6 enable    
+ ip address 10.99.21.1 255.255.255.252
+ ip address 10.33.33.5 255.255.255.252 sub
+ ip address 10.33.33.17 255.255.255.252 sub
+ ip address 10.33.33.61 255.255.255.252 sub
+ ip address 10.99.93.1 255.255.255.252 sub
+ ip address 10.100.21.1 255.255.255.252 sub
+ ip address 45.167.140.225 255.255.255.240 sub
+ ip address 172.17.10.5 255.255.255.252 sub
+ ipv6 address 2804:5698::172:17:10:5/126
+ ipv6 address 2804:5698:100:6::1/64
+ ipv6 address auto link-local
+ undo dcn       
+#               
+interface GigabitEthernet0/4/1
+ undo shutdown  
+ undo dcn       
+ statistic enable
+#               
+interface GigabitEthernet0/4/1.150
+ vlan-type dot1q 150
+ description IPT-STAR1-V4
+ ip address 10.8.23.54 255.255.255.252
+ statistic enable
+#               
+interface GigabitEthernet0/4/1.151
+ vlan-type dot1q 151
+ description IPT-V6-STAR1
+ ipv6 enable    
+ ipv6 address 2804:60D4:300:400::2BE/126
+ statistic enable
+#               
+interface GigabitEthernet0/4/2
+ undo shutdown  
+ undo dcn       
+#               
+interface GigabitEthernet0/4/3
+ undo shutdown  
+ undo dcn       
+#               
+interface GigabitEthernet0/4/4
+ undo shutdown  
+ undo dcn       
+#               
+interface GigabitEthernet0/4/5
+ undo shutdown  
+ undo dcn       
+#               
+interface GigabitEthernet0/4/6
+ undo shutdown  
+ undo dcn       
+#               
+interface GigabitEthernet0/4/7
+ undo shutdown  
+ undo dcn       
+#               
+interface GigabitEthernet0/4/8
+ undo shutdown  
+ undo dcn       
+#               
+interface GigabitEthernet0/4/9
+ undo shutdown  
+ undo dcn       
+#               
+interface 100GE0/3/0
+ description TO-SW6730-CORE
+ undo shutdown  
+ eth-trunk 1    
+ undo dcn       
+#               
+interface 100GE0/3/1
+ description NFWARE
+ undo shutdown  
+ eth-trunk 3    
+ undo dcn       
+#               
+interface LoopBack0
+ ipv6 enable    
+ ip address 10.99.99.0 255.255.255.255
+#               
+interface LoopBack1
+ ipv6 enable    
+ ip address 45.167.140.0 255.255.255.255
+ ipv6 address 2804:5698:100:1::/128
+ binding tunnel gre
+#               
+interface LoopBack21
+#               
+interface Virtual-Ethernet0/1/1
+ description only-L2-MPLS
+ ve-group 1 l2-terminate
+#               
+interface Virtual-Ethernet0/1/1.100
+ vlan-type dot1q 100
+ statistic enable
+#               
+interface Virtual-Ethernet0/1/1.200
+ vlan-type dot1q 200
+ statistic enable
+#               
+interface Virtual-Ethernet0/1/1.300
+ vlan-type dot1q 300
+ statistic enable
+#               
+interface Virtual-Ethernet0/1/100
+ description VS-L2-MPLS
+ ve-group 2 l2-terminate
+#               
+interface Virtual-Ethernet0/1/100.100
+ vlan-type dot1q 100
+ statistic enable
+#               
+interface Virtual-Ethernet0/1/100.300
+ vlan-type dot1q 300
+ statistic enable
+#               
+interface Virtual-Ethernet0/2/1
+ description only-L3-CCTO
+ ve-group 1 l3-access
+#               
+interface Virtual-Ethernet0/2/1.100
+ vlan-type dot1q 100
+ description VS-CDN
+ ipv6 enable    
+ ip address 100.121.0.1 255.255.255.252
+ ipv6 address 2804:5698:100::1/64
+ statistic enable
+ ospfv3 1 area 0.0.0.0
+ ospfv3 network-type p2p
+ ospf network-type p2p
+ ospf enable 1 area 0.0.0.0
+#               
+interface Virtual-Ethernet0/2/1.300
+ vlan-type dot1q 300
+ description VS-IX-UAI
+ ipv6 enable    
+ ip address 100.121.0.5 255.255.255.252
+ ipv6 address auto link-local
+ statistic enable
+ ospfv3 1 area 0.0.0.0
+ ospfv3 network-type p2p
+ ospf network-type p2p
+ ospf enable 1 area 0.0.0.0
+#               
+interface Virtual-Ethernet0/2/60
+ ve-group 60 l2-terminate
+#               
+interface Virtual-Ethernet0/2/66
+ ve-group 60 l3-access
+#               
+interface Virtual-Ethernet0/2/100
+ description VS-L3-CCTO
+ mac-address c4b8-b434-ab49
+ ve-group 2 l3-access
+#               
+interface Virtual-Ethernet0/2/100.100
+ vlan-type dot1q 100
+#               
+interface Virtual-Ethernet0/2/100.300
+ vlan-type dot1q 300
+#               
+interface Virtual-Ethernet0/2/606
+ mac-address c4b8-b434-ae45
+ ve-group 600 l3-access
+#               
+interface Tunnel0
+ description UAI-CONTABO-NETFACIL
+ ip address 10.192.15.200 255.255.255.0
+ tunnel-protocol gre
+ source 45.167.140.0
+ destination 173.249.42.144
+#               
+interface Tunnel13
+ mtu 1420       
+ description ACESSO-ZETEK
+ ip address 10.192.13.100 255.255.255.0
+ tunnel-protocol gre
+ source 45.167.140.0
+ destination 45.5.102.1
+#               
+interface NULL0 
+#               
+ccc VS-CDN interface Virtual-Ethernet0/1/1.100 tagged out-interface Virtual-Ethernet0/1/100.100 tagged
+ccc VS-IX-UAI interface Virtual-Ethernet0/1/1.300 tagged out-interface Virtual-Ethernet0/1/100.300 tagged
+#               
+bgp 268011      
+ router-id 10.99.99.0
+ peer 10.8.23.53 as-number 269194
+ peer 10.8.23.53 description IPT-STAR1-V4
+ peer 10.88.88.41 as-number 271201
+ peer 10.88.88.41 description VIANET-LINK-IP
+ peer 10.99.99.1 as-number 268011
+ peer 10.99.99.1 description iBGP-VSCDN
+ peer 10.99.99.1 connect-interface LoopBack0
+ peer 10.99.99.2 as-number 268011
+ peer 10.99.99.2 description IBGP-VS-IX-UAI-IPV4
+ peer 10.99.99.2 connect-interface LoopBack0
+ peer 18.228.111.63 as-number 65012
+ peer 18.228.111.63 description WALLED GARDEN-V4
+ peer 18.228.111.63 ebgp-max-hop 255
+ peer 18.228.111.63 connect-interface LoopBack1
+ peer 172.16.13.5 as-number 28191
+ peer 172.16.13.5 description JUPITER
+ peer 198.18.255.255 as-number 269194
+ peer 198.18.255.255 description RRV4-STAR1
+ peer 198.18.255.255 ebgp-max-hop 50
+ peer 2600:1F1E:BB0:4400:BE53:5B84:DE42:2030 as-number 65012
+ peer 2600:1F1E:BB0:4400:BE53:5B84:DE42:2030 description WALLED GARDEN-V6
+ peer 2600:1F1E:BB0:4400:BE53:5B84:DE42:2030 ebgp-max-hop 255
+ peer 2600:1F1E:BB0:4400:BE53:5B84:DE42:2030 connect-interface LoopBack1
+ peer 2804:C2C:0:1:172:1613:4:1 as-number 28191
+ peer 2804:C2C:0:1:172:1613:4:1 description JUPITER-V6
+ peer 2804:5698:100::2 as-number 268011
+ peer 2804:5698:100::2 description LINK-NE8KCDN-IPv6
+ peer 2804:5698:100::2 timer keepalive 10 hold 30
+ peer 2804:5698:100:1::1 as-number 268011
+ peer 2804:5698:100:1::1 description IBGP-VS-IX-UAI-IPV6
+ peer 2804:5698:100:1::1 connect-interface LoopBack1
+ peer 2804:60D4:300::255 as-number 269194
+ peer 2804:60D4:300::255 description RRV6-STAR1
+ peer 2804:60D4:300::255 ebgp-max-hop 10
+ peer 2804:60D4:300:400::2BD as-number 269194
+ peer 2804:60D4:300:400::2BD description IPT-STAR1-V6
+ peer FD00:2000::1 as-number 271201
+ peer FD00:2000::1 description ELETRONET-IPV6
+ group CLIENTES-IP external
+ peer 172.21.0.6 as-number 263255
+ peer 172.21.0.6 group CLIENTES-IP
+ peer 172.21.0.6 description CLI-INFOTEC-IP
+ peer 2804:5698:8001::1A as-number 263255
+ peer 2804:5698:8001::1A group CLIENTES-IP
+ peer 2804:5698:8001::1A description CLI-INFOTEC-IP
+ #              
+ ipv4-family unicast
+  undo synchronization
+  preference 20 220 1
+  network 45.167.140.0 255.255.252.0
+  network 45.167.140.0 255.255.254.0
+  network 45.167.140.0 255.255.255.0
+  network 45.167.141.0 255.255.255.0
+  network 45.167.142.0 255.255.254.0
+  network 45.167.142.0 255.255.255.0
+  network 100.80.0.0 255.255.224.0
+  ext-community-change enable
+  peer 10.8.23.53 enable
+  peer 10.8.23.53 route-policy STAR1-v4-IN import
+  peer 10.8.23.53 route-policy STAR1-IP4-OUT export
+  peer 10.8.23.53 next-hop-local
+  peer 10.8.23.53 advertise-community
+  peer 10.8.23.53 advertise-ext-community
+  peer 10.8.23.53 allow-as-loop
+  peer 10.88.88.41 enable
+  peer 10.88.88.41 route-policy VIANET-v4-IN import
+  peer 10.88.88.41 route-policy VIANET-IP-OUT export
+  peer 10.88.88.41 advertise-community
+  peer 10.88.88.41 advertise-large-community
+  peer 10.88.88.41 advertise-ext-community
+  peer 10.88.88.41 allow-as-loop
+  peer 10.99.99.1 enable
+  peer 10.99.99.1 route-policy CDN-IN import
+  peer 10.99.99.1 route-policy CDN-OUT export
+  peer 10.99.99.1 reflect-client
+  peer 10.99.99.1 next-hop-local
+  peer 10.99.99.2 enable
+  peer 10.99.99.2 route-policy IBGP-VS-IX-IPV4-IN import
+  peer 10.99.99.2 route-policy IBGP-VS-IX-IPV4-OUT export
+  peer 10.99.99.2 reflect-client
+  peer 10.99.99.2 next-hop-local
+  peer 18.228.111.63 enable
+  peer 18.228.111.63 route-policy Walled-IN import
+  peer 18.228.111.63 route-policy Walled-OUT export
+  peer 18.228.111.63 advertise-community
+  peer 18.228.111.63 advertise-ext-community
+  peer 172.16.13.5 enable
+  peer 172.16.13.5 route-policy RP-JUPITER-IN import
+  peer 172.16.13.5 route-policy RP-JUPITER-OUT export
+  peer 172.16.13.5 advertise-community
+  peer 172.16.13.5 advertise-large-community
+  peer 172.16.13.5 advertise-ext-community
+  peer 172.16.13.5 allow-as-loop
+  peer 198.18.255.255 enable
+  peer 198.18.255.255 route-policy RR-STAR1-v4-IN import
+  peer 198.18.255.255 route-policy RR-STAR1-IP4-OUT export
+  peer 198.18.255.255 advertise-community
+  peer 198.18.255.255 advertise-ext-community
+  peer CLIENTES-IP enable
+  peer 172.21.0.6 enable
+  peer 172.21.0.6 group CLIENTES-IP
+  peer 172.21.0.6 route-policy CLI-IP-INFOTEC-IPV4-IN import
+  peer 172.21.0.6 route-policy CLI-IP-INFOTEC-IPV4-OUT export
+ #              
+ ipv6-family unicast
+  undo synchronization
+  network 2804:5698:: 32
+  ext-community-change enable
+  peer 2600:1F1E:BB0:4400:BE53:5B84:DE42:2030 enable
+  peer 2600:1F1E:BB0:4400:BE53:5B84:DE42:2030 route-policy Walled-v6-IN import
+  peer 2600:1F1E:BB0:4400:BE53:5B84:DE42:2030 route-policy Walled-v6-OUT export
+  peer 2600:1F1E:BB0:4400:BE53:5B84:DE42:2030 advertise-community
+  peer 2600:1F1E:BB0:4400:BE53:5B84:DE42:2030 advertise-ext-community
+  peer 2804:C2C:0:1:172:1613:4:1 enable
+  peer 2804:C2C:0:1:172:1613:4:1 route-policy RP-JUPITERv6-OUT export
+  peer 2804:5698:100::2 enable
+  peer 2804:5698:100::2 route-policy RP-IBGPv6-IMPORT import
+  peer 2804:5698:100::2 route-policy RP-IBGPv6-EXPORT export
+  peer 2804:5698:100::2 next-hop-local
+  peer 2804:5698:100::2 advertise-community
+  peer 2804:5698:100::2 advertise-ext-community
+  peer 2804:5698:100::2 default-route-advertise
+  peer 2804:5698:100:1::1 enable
+  peer 2804:5698:100:1::1 route-policy IBGP-VS-IX-IPV6-IN import
+  peer 2804:5698:100:1::1 route-policy IBGP-VS-IX-IPV6-OUT export
+  peer 2804:5698:100:1::1 reflect-client
+  peer 2804:5698:100:1::1 next-hop-local
+  peer 2804:60D4:300::255 enable
+  peer 2804:60D4:300::255 route-policy RR-STAR1-V6-IN import
+  peer 2804:60D4:300::255 route-policy RR-STAR1-V6-OUT export
+  peer 2804:60D4:300::255 next-hop-local
+  peer 2804:60D4:300::255 advertise-community
+  peer 2804:60D4:300::255 advertise-ext-community
+  peer 2804:60D4:300:400::2BD enable
+  peer 2804:60D4:300:400::2BD route-policy IPT-STAR1v6-IN import
+  peer 2804:60D4:300:400::2BD route-policy IPT-STAR1v6-OUT export
+  peer 2804:60D4:300:400::2BD next-hop-local
+  peer 2804:60D4:300:400::2BD advertise-community
+  peer 2804:60D4:300:400::2BD advertise-ext-community
+  peer FD00:2000::1 enable
+  peer FD00:2000::1 route-policy RP-ELETRONETv6-IN import
+  peer FD00:2000::1 route-policy RP-ELETRONETv6-OUT export
+  peer CLIENTES-IP enable
+  peer 2804:5698:8001::1A enable
+  peer 2804:5698:8001::1A group CLIENTES-IP
+  peer 2804:5698:8001::1A route-policy CLI-IP-INFOTEC-IPV6-IN import
+  peer 2804:5698:8001::1A route-policy CLI-IP-INFOTEC-IPV6-OUT export
+#               
+ospf 1          
+ default-route-advertise
+ import-route direct
+ import-route static
+ preference 110 
+ opaque-capability enable
+ area 0.0.0.0   
+  network 10.0.0.0 0.0.0.255 description 10.0.0.0/8
+  network 100.121.0.0 0.0.0.3 description to-VSCDN
+  network 172.16.25.28 0.0.0.3
+#               
+undo dcn        
+#               
+route-policy BGP-OUT deny node 100
+#               
+route-policy CDN-IN permit node 10
+ if-match ip-prefix PL-IBGP-IN
+ apply local-preference 450
+#               
+route-policy CDN-IN deny node 100
+#               
+route-policy CDN-OUT permit node 10
+ description export-CDN
+ if-match community-filter CUSTOMERS
+#               
+route-policy CDN-OUT permit node 20
+ if-match ip-prefix PL-BLOCO-FULL
+#               
+route-policy CDN-OUT permit node 30
+ if-match ip-prefix BLOCO-CGNAT
+#               
+route-policy CDN-OUT deny node 100
+#               
+route-policy CLI-IP-INFOTEC-IPV4-IN permit node 100
+ if-match ip-prefix CLI-IP-INFOTEC-IPV4-IN
+ apply local-preference 550
+ apply community 26801:700 26801:1000 additive
+ apply preferred-value 550
+#               
+route-policy CLI-IP-INFOTEC-IPV4-OUT permit node 100
+#               
+route-policy CLI-IP-INFOTEC-IPV6-IN permit node 100
+ if-match ipv6 address prefix-list CLI-IP-INFOTEC-IPV6-IN
+ apply local-preference 550
+ apply community 26801:700 26801:1000 additive
+ apply preferred-value 550
+#               
+route-policy CLI-IP-INFOTEC-IPV6-OUT permit node 100
+#               
+route-policy GGC-OUT permit node 10
+ description export-GGC
+ if-match community-filter CUSTOMERS
+#               
+route-policy GGC-OUT permit node 20
+ if-match ip-prefix PL-BLOCO-FULL
+#               
+route-policy GGC-OUT deny node 100
+#               
+route-policy IBGP-VS-IX-IPV4-IN permit node 100
+ apply ip-address next-hop peer-address
+ apply local-preference 800
+#               
+route-policy IBGP-VS-IX-IPV4-OUT permit node 100
+ if-match ip-prefix IBGP-VS-IX-IPV4-OUT
+#               
+route-policy IBGP-VS-IX-IPV6-IN permit node 100
+ apply local-preference 350
+ apply ipv6 next-hop peer-address
+#               
+route-policy IBGP-VS-IX-IPV6-OUT permit node 100
+ if-match ipv6 address prefix-list IBGP-VS-IX-IPV6-OUT
+#               
+route-policy IPT-STAR1v6-IN permit node 100
+#               
+route-policy IPT-STAR1v6-OUT permit node 100
+ if-match ipv6 address prefix-list PL-MEUBLOCOv6-FULL
+ apply comm-filter ZERAR-COMUNIDADES delete
+#               
+route-policy IPT-STAR1v6-OUT permit node 110
+ if-match ipv6 address prefix-list PL-MEUBLOCOv6-FULL
+ apply as-path 268011 268011 268011 268011 additive
+#               
+route-policy IPT-STAR1v6-OUT deny node 200
+#               
+route-policy RP-CYMRU_BOGONS-IN permit node 10
+ if-match community-filter 2
+ apply ip-address next-hop 192.0.2.1
+#               
+route-policy RP-CYMRU_BOGONS-OUT deny node 10
+ if-match ip-prefix PL-CYMRU_BOGONS-OUT
+#               
+route-policy RP-ELETRONETv6-IN permit node 10
+#               
+route-policy RP-ELETRONETv6-OUT deny node 1
+ if-match community-filter NEGAR-ELETRONET
+#               
+route-policy RP-ELETRONETv6-OUT permit node 10
+ if-match ipv6 address prefix-list PL-MEUBLOCOv6-FULL
+#               
+route-policy RP-ELETRONETv6-OUT permit node 101
+ if-match community-filter 1X-PREPEND-ELETRONET
+ apply as-path 268011 additive
+ apply comm-filter ZERAR-COMUNIDADES delete
+#               
+route-policy RP-ELETRONETv6-OUT permit node 102
+ if-match community-filter 2X-PREPEND-ELETRONET
+ apply as-path 268011 268011 additive
+ apply comm-filter ZERAR-COMUNIDADES delete
+#               
+route-policy RP-ELETRONETv6-OUT permit node 103
+ if-match community-filter 3X-PREPEND-ELETRONET
+ apply as-path 268011 268011 268011 additive
+ apply comm-filter ZERAR-COMUNIDADES delete
+#               
+route-policy RP-ELETRONETv6-OUT permit node 104
+ if-match community-filter 4X-PREPEND-ELETRONET
+ apply as-path 268011 268011 268011 268011 additive
+ apply comm-filter ZERAR-COMUNIDADES delete
+#               
+route-policy RP-ELETRONETv6-OUT permit node 200
+ if-match community-filter EXPORTAR-TUDO
+ apply comm-filter ZERAR-COMUNIDADES delete
+#               
+route-policy RP-IBGPv6-EXPORT permit node 100
+ if-match ipv6 address prefix-list PL-IBGPv6-EXPORT
+#               
+route-policy RP-IBGPv6-IMPORT deny node 1000
+#               
+route-policy RP-IBL-IN permit node 10
+ if-match ip-prefix PL-CDN-IBL-IN
+ apply local-preference 9999
+#               
+route-policy RP-JUPITER-IN deny node 3
+ if-match as-path-filter DENY-CUSTOMERS
+#               
+route-policy RP-JUPITER-IN deny node 4
+ if-match as-path-filter DENY-NETFACIL
+#               
+route-policy RP-JUPITER-IN deny node 5
+ if-match ip-prefix PL-BLOCK-CUSTOMER
+ apply local-preference 5000
+#               
+route-policy RP-JUPITER-IN permit node 6
+ if-match as-path-filter UPLOAD-JUPITER
+ apply local-preference 500
+#               
+route-policy RP-JUPITER-IN permit node 7
+ if-match ip-prefix PL-FULL-ROUT
+ apply local-preference 150
+#               
+route-policy RP-JUPITER-IN permit node 8
+ if-match ip-prefix PL-ROTA-DEFAULT
+ apply local-preference 150
+#               
+route-policy RP-JUPITER-IN permit node 10
+ apply local-preference 150
+#               
+route-policy RP-JUPITER-OUT deny node 1
+ if-match community-filter NEGAR-JUPITER
+#               
+route-policy RP-JUPITER-OUT permit node 6
+ if-match ip-prefix PL-BLOCO/22
+#               
+route-policy RP-JUPITER-OUT permit node 19
+ if-match ip-prefix PL-BLOCO/23-140
+#               
+route-policy RP-JUPITER-OUT deny node 20
+ if-match ip-prefix PL-BLOCO/23-142
+#               
+route-policy RP-JUPITER-OUT permit node 21
+ if-match ip-prefix PL-BLOCO/24-140
+#               
+route-policy RP-JUPITER-OUT deny node 22
+ if-match ip-prefix PL-BLOCO/24-141
+#               
+route-policy RP-JUPITER-OUT permit node 23
+ if-match ip-prefix PL-BLOCO/24-142
+#               
+route-policy RP-JUPITER-OUT deny node 25
+ if-match ip-prefix PL-BLOCO/24-143
+#               
+route-policy RP-JUPITER-OUT permit node 101
+ if-match community-filter 1X-PREPEND-JUPITER
+ apply as-path 268011 additive
+ apply comm-filter ZERAR-COMUNIDADES delete
+#               
+route-policy RP-JUPITER-OUT permit node 102
+ if-match community-filter 2X-PREPEND-JUPITER
+ apply as-path 268011 268011 additive
+ apply comm-filter ZERAR-COMUNIDADES delete
+#               
+route-policy RP-JUPITER-OUT permit node 103
+ if-match community-filter 3X-PREPEND-JUPITER
+ apply as-path 268011 268011 268011 additive
+ apply comm-filter ZERAR-COMUNIDADES delete
+#               
+route-policy RP-JUPITER-OUT permit node 104
+ if-match community-filter 4X-PREPEND-JUPITER
+ apply as-path 268011 268011 268011 268011 268011 268011 additive
+ apply comm-filter ZERAR-COMUNIDADES delete
+#               
+route-policy RP-JUPITER-OUT permit node 200
+ if-match community-filter EXPORTAR-TUDO
+ apply comm-filter ZERAR-COMUNIDADES delete
+#               
+route-policy RP-JUPITERv6-IN permit node 10
+#               
+route-policy RP-JUPITERv6-OUT deny node 1
+ if-match community-filter NEGAR-JUPITER
+#               
+route-policy RP-JUPITERv6-OUT permit node 10
+ if-match ipv6 address prefix-list PL-MEUBLOCOv6-FULL
+ apply as-path 268011 268011 268011 268011 additive
+#               
+route-policy RP-JUPITERv6-OUT permit node 101
+ if-match community-filter 1X-PREPEND-JUPITER
+ apply as-path 268011 additive
+ apply comm-filter ZERAR-COMUNIDADES delete
+#               
+route-policy RP-JUPITERv6-OUT permit node 102
+ if-match community-filter 2X-PREPEND-JUPITER
+ apply as-path 268011 268011 additive
+ apply comm-filter ZERAR-COMUNIDADES delete
+#               
+route-policy RP-JUPITERv6-OUT permit node 103
+ if-match community-filter 3X-PREPEND-JUPITER
+ apply as-path 268011 268011 268011 additive
+ apply comm-filter ZERAR-COMUNIDADES delete
+#               
+route-policy RP-JUPITERv6-OUT permit node 104
+ if-match community-filter 4X-PREPEND-JUPITER
+ apply as-path 268011 268011 268011 268011 268011 268011 additive
+ apply comm-filter ZERAR-COMUNIDADES delete
+#               
+route-policy RP-JUPITERv6-OUT permit node 200
+ if-match community-filter EXPORTAR-TUDO
+ apply comm-filter ZERAR-COMUNIDADES delete
+#               
+route-policy RP-OCA-EXPORT permit node 100
+ if-match ip-prefix PL-BLOCO-FULL
+#               
+route-policy RP-OCA-EXPORT permit node 110
+ if-match ip-prefix PL-CONET/FULL
+#               
+route-policy RP-OCA-IMPORT deny node 100
+#               
+route-policy RR-STAR1-IP4-OUT deny node 10
+ description NOT-EXPORT-RR
+#               
+route-policy RR-STAR1-V6-IN permit node 100
+ description ACCEPT-FULLROUTE
+ apply local-preference 150
+#               
+route-policy RR-STAR1-V6-OUT deny node 10
+#               
+route-policy RR-STAR1-v4-IN deny node 10
+ if-match as-path-filter DENY-CUSTOMERS
+#               
+route-policy RR-STAR1-v4-IN deny node 20
+ if-match as-path-filter DENY-NETFACIL
+#               
+route-policy RR-STAR1-v4-IN deny node 30
+ if-match ip-prefix PL-BLOCK-CUSTOMER
+#               
+route-policy RR-STAR1-v4-IN deny node 40
+ if-match ip-prefix bloco-CONET
+#               
+route-policy RR-STAR1-v4-IN permit node 120
+ apply local-preference 150
+#               
+route-policy STAR1-IP4-OUT permit node 6
+ if-match ip-prefix PL-BLOCO/22
+#               
+route-policy STAR1-IP4-OUT deny node 10
+ if-match community-filter NEGAR-ELETRONET
+#               
+route-policy STAR1-IP4-OUT deny node 20
+ if-match community-filter NEGAR-JUPITER
+#               
+route-policy STAR1-IP4-OUT deny node 30
+ if-match ip-prefix PL-BLOCO/23-142
+#               
+route-policy STAR1-IP4-OUT permit node 100
+ if-match ip-prefix PL-BLOCO/23-140
+#               
+route-policy STAR1-IP4-OUT deny node 110
+ if-match ip-prefix PL-BLOCO/24-140
+ apply as-path 268011 additive
+#               
+route-policy STAR1-IP4-OUT deny node 120
+ if-match ip-prefix PL-BLOCO/24-141
+#               
+route-policy STAR1-IP4-OUT permit node 130
+ if-match ip-prefix PL-BLOCO/24-142
+#               
+route-policy STAR1-IP4-OUT deny node 150
+#               
+route-policy STAR1-v4-IN deny node 10
+ if-match as-path-filter DENY-CUSTOMERS
+#               
+route-policy STAR1-v4-IN deny node 20
+ if-match as-path-filter DENY-NETFACIL
+#               
+route-policy STAR1-v4-IN deny node 30
+ if-match ip-prefix PL-BLOCK-CUSTOMER
+#               
+route-policy STAR1-v4-IN deny node 40
+ if-match ip-prefix bloco-CONET
+#               
+route-policy STAR1-v4-IN permit node 110
+ if-match as-path-filter UPLOAD-STAR1
+ apply local-preference 1300
+#               
+route-policy STAR1-v4-IN permit node 120
+ apply local-preference 150
+#               
+route-policy VIANET-IP-OUT deny node 1
+ if-match community-filter NEGAR-ELETRONET
+#               
+route-policy VIANET-IP-OUT permit node 6
+ if-match ip-prefix PL-BLOCO/22
+#               
+route-policy VIANET-IP-OUT deny node 10
+ if-match ip-prefix PL-BLOCO/23-142
+#               
+route-policy VIANET-IP-OUT permit node 12
+ if-match ip-prefix PL-BLOCO/23-140
+#               
+route-policy VIANET-IP-OUT deny node 13
+ if-match ip-prefix PL-BLOCO/24-141
+ apply as-path 268011 268011 268011 268011 268011 268011 268011 additive
+#               
+route-policy VIANET-IP-OUT deny node 14
+ if-match ip-prefix PL-BLOCO/24-142
+ apply as-path 268011 268011 268011 additive
+#               
+route-policy VIANET-IP-OUT deny node 15
+ if-match ip-prefix PL-BLOCO/24-140
+#               
+route-policy VIANET-IP-OUT permit node 101
+ if-match community-filter 1X-PREPEND-ELETRONET
+ apply as-path 268011 additive
+ apply comm-filter ZERAR-COMUNIDADES delete
+#               
+route-policy VIANET-IP-OUT permit node 102
+ if-match community-filter 2X-PREPEND-ELETRONET
+ apply as-path 268011 268011 additive
+ apply comm-filter ZERAR-COMUNIDADES delete
+#               
+route-policy VIANET-IP-OUT permit node 103
+ if-match community-filter 3X-PREPEND-ELETRONET
+ apply as-path 268011 268011 268011 additive
+ apply comm-filter ZERAR-COMUNIDADES delete
+#               
+route-policy VIANET-IP-OUT permit node 104
+ if-match community-filter 4X-PREPEND-ELETRONET
+ apply as-path 268011 268011 268011 268011 additive
+ apply comm-filter ZERAR-COMUNIDADES delete
+#               
+route-policy VIANET-IP-OUT permit node 200
+ if-match community-filter EXPORTAR-TUDO
+ apply comm-filter ZERAR-COMUNIDADES delete
+#               
+route-policy VIANET-v4-IN deny node 3
+ if-match as-path-filter DENY-CUSTOMERS
+#               
+route-policy VIANET-v4-IN deny node 4
+ if-match as-path-filter DENY-NETFACIL
+#               
+route-policy VIANET-v4-IN deny node 5
+ if-match ip-prefix PL-BLOCK-CUSTOMER
+#               
+route-policy VIANET-v4-IN deny node 10
+ if-match ip-prefix bloco-CONET
+#               
+route-policy VIANET-v4-IN permit node 14
+ if-match as-path-filter UPLOAD-VIANET
+ apply local-preference 700
+#               
+route-policy VIANET-v4-IN permit node 15
+ if-match ip-prefix bloco-VIANET
+ apply local-preference 1100
+#               
+route-policy VIANET-v4-IN permit node 19
+ if-match as-path-filter UMBRE
+ apply local-preference 1005
+#               
+route-policy VIANET-v4-IN permit node 20
+ if-match ip-prefix ESUS-IMPREATRIZ
+ apply local-preference 900
+#               
+route-policy VIANET-v4-IN permit node 100
+ apply local-preference 150
+#               
+route-policy Walled-IN deny node 1
+ if-match ip-prefix walled-liberado
+#               
+route-policy Walled-IN permit node 10
+ apply ip-address next-hop 192.0.2.1
+#               
+route-policy Walled-OUT deny node 10
+#               
+route-policy Walled-v6-IN deny node 1
+ if-match ipv6 address prefix-list walled-liberado-v6
+#               
+route-policy Walled-v6-IN permit node 15
+ apply ipv6 next-hop 2800:DB8:192:0:2::1
+#               
+route-policy Walled-v6-OUT deny node 10
+#               
+ip ip-prefix BLOCO-CGNAT index 10 permit 100.80.0.0 19 greater-equal 19 less-equal 24
+ip ip-prefix CLI-IP-INFOTEC-IPV4-IN index 100 permit 190.180.148.0 22 greater-equal 22 less-equal 24
+ip ip-prefix ESUS-IMPREATRIZ index 10 permit 177.185.136.0 24
+ip ip-prefix IBGP-VS-IX-IPV4-OUT index 10 deny 45.167.143.0 24
+ip ip-prefix IBGP-VS-IX-IPV4-OUT index 100 permit 45.167.140.0 22 greater-equal 22 less-equal 24
+ip ip-prefix IBGP-VS-IX-IPV4-OUT index 101 permit 191.36.136.0 21 greater-equal 24 less-equal 24
+ip ip-prefix IBGP-VS-IX-IPV4-OUT index 102 permit 190.180.148.0 22 greater-equal 23 less-equal 24
+ip ip-prefix PL-BLOCK-CUSTOMER index 1 deny 45.167.143.0 24
+ip ip-prefix PL-BLOCK-CUSTOMER index 5 permit 45.167.140.0 22 greater-equal 22 less-equal 32
+ip ip-prefix PL-BLOCK-CUSTOMER index 10 permit 45.167.140.0 24 greater-equal 24 less-equal 32
+ip ip-prefix PL-BLOCK-CUSTOMER index 15 permit 45.167.141.0 24 greater-equal 24 less-equal 32
+ip ip-prefix PL-BLOCK-CUSTOMER index 20 permit 45.167.142.0 24 greater-equal 24 less-equal 32
+ip ip-prefix PL-BLOCK-CUSTOMER index 30 permit 177.72.200.0 22 greater-equal 22 less-equal 24
+ip ip-prefix PL-BLOCK-CUSTOMER index 40 permit 45.163.100.0 22 greater-equal 22 less-equal 24
+ip ip-prefix PL-BLOCK-CUSTOMER index 50 permit 177.52.136.0 22 greater-equal 22 less-equal 24
+ip ip-prefix PL-BLOCK-CUSTOMER index 60 permit 189.14.120.0 22 greater-equal 22 less-equal 24
+ip ip-prefix PL-BLOCK-CUSTOMER index 70 permit 190.180.148.0 22 greater-equal 22 less-equal 32
+ip ip-prefix PL-BLOCK-VIANET-IMPORT index 10 permit 45.167.140.0 22 greater-equal 22 less-equal 24
+ip ip-prefix PL-BLOCO-FULL index 10 permit 45.167.140.0 22 greater-equal 22 less-equal 24
+ip ip-prefix PL-BLOCO/22 index 10 permit 45.167.140.0 22
+ip ip-prefix PL-BLOCO/23-140 index 10 permit 45.167.140.0 23
+ip ip-prefix PL-BLOCO/23-142 index 10 permit 45.167.142.0 23
+ip ip-prefix PL-BLOCO/24-140 index 10 permit 45.167.140.0 24
+ip ip-prefix PL-BLOCO/24-141 index 10 permit 45.167.141.0 24
+ip ip-prefix PL-BLOCO/24-142 index 10 permit 45.167.142.0 24
+ip ip-prefix PL-BLOCO/24-143 index 10 permit 45.167.143.0 24
+ip ip-prefix PL-CDN-IBL-IN index 10 permit 170.83.80.0 22 greater-equal 22 less-equal 24
+ip ip-prefix PL-CDN-IBL-IN index 20 permit 170.83.80.0 22 greater-equal 22 less-equal 32
+ip ip-prefix PL-CDN-IMPERANET-IN index 10 permit 168.197.12.0 22 greater-equal 22 less-equal 24
+ip ip-prefix PL-CDN-IMPERANET-IN index 20 permit 168.197.12.0 22 greater-equal 22 less-equal 32
+ip ip-prefix PL-CONET/FULL index 40 permit 45.189.75.0 24 greater-equal 24 less-equal 32
+ip ip-prefix PL-CYMRU_BOGONS-OUT index 10 deny 0.0.0.0 0 less-equal 32
+ip ip-prefix PL-FULL-ROUT index 8 deny 179.49.184.0 22 greater-equal 22 less-equal 24
+ip ip-prefix PL-FULL-ROUT index 10 permit 0.0.0.0 0 less-equal 24
+ip ip-prefix PL-IBGP-IN index 10 permit 191.36.136.0 21 greater-equal 21 less-equal 24
+ip ip-prefix PL-PARCIAL-WIKI index 10 permit 0.0.0.0 0 greater-equal 8 less-equal 24
+ip ip-prefix PL-PTT-IMPORT index 100 permit 0.0.0.0 0 greater-equal 8 less-equal 24
+ip ip-prefix PL-ROTA-DEFAULT index 10 permit 0.0.0.0 0
+ip ip-prefix PL-TABELA-FULL-ROUTERVIEWS index 9 deny 0.0.0.0 0
+ip ip-prefix PL-TABELA-FULL-ROUTERVIEWS index 10 permit 0.0.0.0 0 less-equal 24
+ip ip-prefix PL-TRANSITO-IMPERANET index 10 permit 45.167.140.0 22
+ip ip-prefix PL-TRANSITO-IMPERANET index 20 permit 45.167.140.0 23
+ip ip-prefix PL-TRANSITO-IMPERANET index 30 permit 45.167.142.0 23
+ip ip-prefix PL-VIANET index 10 permit 179.49.184.0 22
+ip ip-prefix PL-VIANET index 20 permit 179.49.186.0 23
+ip ip-prefix PL-VIANET index 30 permit 179.49.184.0 23
+ip ip-prefix PL-VIANET index 40 permit 179.49.192.0 22 greater-equal 22 less-equal 23
+ip ip-prefix PL-VIANET-FULL index 10 permit 179.49.184.0 22 greater-equal 22 less-equal 24
+ip ip-prefix PL-VIANET-FULL index 20 permit 177.72.200.0 22 greater-equal 22 less-equal 23
+ip ip-prefix PL-VIANET-FULL index 30 permit 189.14.120.0 22
+ip ip-prefix PREFIXO-45.167.141.0/24 index 10 permit 45.167.141.0 24
+ip ip-prefix anuncio-IX-SP-v4 index 10 permit 45.167.140.0 24
+ip ip-prefix anuncio-IX-SP-v4 index 20 deny 45.167.141.0 24
+ip ip-prefix anuncio-IX-SP-v4 index 30 permit 45.167.142.0 24
+ip ip-prefix anuncio-VIANET-v4 index 8 deny 45.167.140.0 24
+ip ip-prefix anuncio-VIANET-v4 index 9 permit 45.167.141.0 24
+ip ip-prefix anuncio-VIANET-v4 index 10 deny 45.167.142.0 24
+ip ip-prefix anuncio-iBGP-tutoia-v4-GRE index 10 permit 100.64.0.0 10 greater-equal 10 less-equal 32
+ip ip-prefix bloco-CONET index 10 permit 45.189.72.0 22 greater-equal 22 less-equal 24
+ip ip-prefix bloco-VIANET index 10 permit 179.49.184.0 22 greater-equal 22 less-equal 24
+ip ip-prefix recebe-iBGP-tutoia-v4 index 10 permit 45.167.143.0 24
+ip ip-prefix recebe-iBGP-tutoia-v4-GRE index 10 permit 100.64.0.0 10 greater-equal 10 less-equal 32
+ip ip-prefix walled-liberado index 10 permit 45.167.140.0 22 greater-equal 22 less-equal 32
+ip ip-prefix walled-liberado index 20 permit 185.34.106.31 32
+ip as-path-filter ANIME index 10 permit _24940$
+ip as-path-filter AP-BLOCK-WIKI index 100 permit _24071$
+ip as-path-filter AP-BLOCK-WIKI index 110 permit _58521$
+ip as-path-filter AP-BLOCK-WIKI index 120 permit _18881$
+ip as-path-filter ASPATH_99 index 2 permit _263255_
+ip as-path-filter DENY-CUSTOMERS index 10 permit _263255$
+ip as-path-filter DENY-NETFACIL index 10 permit _268011$
+ip as-path-filter UMBRE index 10 permit _53057$
+ip as-path-filter UNIVERSIDADE index 10 permit _2716$
+ip as-path-filter UPLOAD-JUPITER index 10 permit _16509$
+ip as-path-filter UPLOAD-STAR1 index 10 permit _53124$
+ip as-path-filter UPLOAD-VIANET index 10 permit _53124$
+ip as-path-filter UPLOAD-VIANET index 20 permit _18881$
+ip community-filter 2 index 10 permit 888
+ip community-filter 2 index 20 permit 65332:888
+ip community-filter 2 index 30 permit no-advertise
+ip community-filter 2 index 40 permit no-export
+ip community-filter basic 1X-PREPEND-ELETRONET index 10 permit 26801:2001
+ip community-filter basic 1X-PREPEND-JUPITER index 10 permit 26801:1001
+ip community-filter basic 2X-PREPEND-ELETRONET index 10 permit 26801:2002
+ip community-filter basic 2X-PREPEND-JUPITER index 10 permit 26801:1002
+ip community-filter basic 3X-PREPEND-ELETRONET index 10 permit 26801:2003
+ip community-filter basic 3X-PREPEND-JUPITER index 10 permit 26801:1003
+ip community-filter basic 4X-PREPEND-ELETRONET index 10 permit 26801:2004
+ip community-filter basic 4X-PREPEND-JUPITER index 10 permit 26801:1004
+ip community-filter basic CUSTOMERS index 10 permit 64712:30
+ip community-filter basic EXPORTAR-TUDO index 10 permit 26801:700
+ip community-filter basic NEGAR-ELETRONET index 10 permit 26801:2000
+ip community-filter basic NEGAR-JUPITER index 10 permit 26801:1000
+ip community-filter advanced ZERAR-COMUNIDADES index 10 permit 26801:*
+#               
+ip route-static 10.0.0.0 255.0.0.0 NULL0
+ip route-static 10.33.33.4 255.255.255.252 10.99.21.2 description DNS-ANTIGO-01
+ip route-static 10.33.33.16 255.255.255.252 10.99.21.2 description DNS-ANTIGO-02
+ip route-static 10.33.33.60 255.255.255.252 10.99.21.2 description VM-PHPIPAM
+ip route-static 10.100.21.0 255.255.255.0 10.99.21.2 description SERVIDORES-CADDY
+ip route-static 10.160.1.0 255.255.255.0 10.192.13.200 description REDE-OLTS-ZETEK
+ip route-static 10.200.1.162 255.255.255.255 167.249.171.226
+ip route-static 45.167.140.0 255.255.252.0 NULL0
+ip route-static 45.167.140.0 255.255.254.0 NULL0
+ip route-static 45.167.140.0 255.255.255.0 NULL0
+ip route-static 45.167.140.8 255.255.255.252 10.99.21.2 description DNS-ANTIGO
+ip route-static 45.167.141.0 255.255.255.0 NULL0
+ip route-static 45.167.142.0 255.255.254.0 NULL0
+ip route-static 45.167.142.0 255.255.255.0 10.66.66.38 description NFWARE
+ip route-static 64.63.0.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.1.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.2.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.3.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.4.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.5.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.6.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.7.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.8.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.9.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.10.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.11.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.12.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.13.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.14.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.15.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.16.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.17.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.18.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.19.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.20.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.21.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.22.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.23.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.24.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.25.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.26.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.27.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.28.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.29.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.30.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.31.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.32.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.33.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.34.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.35.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.36.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.37.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.38.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.39.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.40.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.41.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.42.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.43.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.44.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.45.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.46.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.47.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.48.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.49.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.50.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.51.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.52.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.53.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.54.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.55.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.56.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.57.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.58.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.59.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.60.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.61.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.62.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 64.63.63.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.160.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.161.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.162.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.163.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.164.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.165.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.166.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.167.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.168.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.169.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.170.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.171.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.172.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.173.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.174.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.175.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.176.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.177.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.178.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.179.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.180.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.181.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.182.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.183.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.184.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.185.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.186.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.187.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.188.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.189.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.190.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 69.195.191.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 100.64.0.0 255.192.0.0 NULL0
+ip route-static 103.252.112.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 103.252.113.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 103.252.114.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 103.252.115.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 104.244.40.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 104.244.41.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 104.244.42.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 104.244.44.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 104.244.45.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 104.244.46.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 104.244.47.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 108.179.217.143 255.255.255.255 NULL0
+ip route-static 172.16.0.0 255.240.0.0 NULL0
+ip route-static 177.54.225.0 255.255.255.255 NULL0
+ip route-static 188.64.224.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 188.64.225.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 188.64.226.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 188.64.227.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 188.64.228.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 188.64.229.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 188.64.230.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 188.64.231.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 191.31.164.9 255.255.255.255 10.88.88.41 preference 1
+ip route-static 192.0.2.1 255.255.255.255 NULL0
+ip route-static 192.133.76.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 192.133.77.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 192.133.78.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 192.133.79.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 192.168.0.0 255.255.0.0 NULL0
+ip route-static 198.18.255.255 255.255.255.255 10.8.23.53 preference 1 description RR-STAR1
+ip route-static 199.16.156.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 199.16.157.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 199.16.158.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 199.16.159.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 199.59.148.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 199.59.149.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 199.59.150.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 199.59.151.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 199.96.56.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 199.96.57.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 202.160.128.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 202.160.129.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 202.160.130.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 202.160.131.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.192.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.193.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.194.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.195.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.196.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.197.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.198.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.199.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.200.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.201.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.202.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.203.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.204.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.205.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.206.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.207.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.208.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.209.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.210.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.211.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.212.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.213.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.214.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.215.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.216.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.217.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.218.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.219.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.220.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.221.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.222.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+ip route-static 209.237.223.0 255.255.255.0 NULL0 preference 1 description TWITTER-ANATEL
+#               
+ipv6 route-static 2001:DB8:192:0:2::1 128 NULL0
+ipv6 route-static 2804:5698:: 32 NULL0
+ipv6 route-static 2804:60D4:300::255 128 2804:60D4:300:400::2BD preference 1 description IPRR-STAR1
+#               
+ip ipv6-prefix CLI-IP-INFOTEC-IPV6-IN index 100 permit 2804:17DC:: 32 greater-equal 32 less-equal 48
+ip ipv6-prefix IBGP-VS-IX-IPV6-OUT index 100 permit 2804:5698:: 32 greater-equal 32 less-equal 48
+ip ipv6-prefix PL-CDN-IMPERANETv6-IN index 10 permit 2804:3484:: 32 greater-equal 32 less-equal 45
+ip ipv6-prefix PL-IBGPv6-EXPORT index 10 permit 2804:5698:: 32 greater-equal 32 less-equal 40
+ip ipv6-prefix PL-IMPERANETv6-IN index 10 permit :: 0
+ip ipv6-prefix PL-MEUBLOCOv6-FULL index 10 permit 2804:5698:: 32
+ip ipv6-prefix PL-TABELAv6-ROUTEVIEWS index 10 permit :: 0 less-equal 48
+ip ipv6-prefix walled-liberado-v6 index 10 permit 2804:5698:: 32 greater-equal 32 less-equal 128
+#               
+snmp-agent      
+snmp-agent acl 2000
+snmp-agent local-engineid 800007DB03B00875836026
+snmp-agent community read cipher %^%#VmCP'@]!(U}pI!,[A0|*dX9A$6$(0~4oY&&~V`LBIZ/COLw.XPyKh`4po'{Ib%-n(iM<BMb(jt<H@\(1%^%# alias __CommunityAliasName_01_41934
+snmp-agent community read cipher %^%#S$W@FvR!:Dos+/6^=hkA-}o.8|n4\AUu~pPV"[:K,c=xI1<1mR96cM*O,>z6^KE,Bh.bzLzv<mWnb)h=%^%# alias MW-SOLUCOES
+#               
+snmp-agent sys-info contact SYSadmin noc@netfacilbandalarga.com.br
+snmp-agent sys-info location Datacenter Netfacil Imperatriz-Ma
+snmp-agent sys-info version v2c v3
+#               
+snmp-agent protocol source-status all-interface
+snmp-agent protocol source-status ipv6 all-interface
+#               
+undo snmp-agent proxy protocol source-status all-interface
+undo snmp-agent proxy protocol source-status ipv6 all-interface
+#               
+lldp enable     
+#               
+undo web-auth-server source-ip all
+#               
+undo web-auth-server source-ipv6 all
+#               
+stelnet server enable
+snetconf server enable
+ssh ipv4 server port 1822
+ssh ipv6 server port 1822
+ssh user caetano
+ssh user caetano authentication-type password
+ssh user caetano service-type all
+ssh user netfacilnoc
+ssh user netfacilnoc authentication-type all
+ssh user netfacilnoc service-type all
+ssh user noc@netfacil
+ssh user noc@netfacil authentication-type all
+ssh user noc@netfacil service-type all
+ssh user NOCnetfacil
+ssh user NOCnetfacil authentication-type all
+ssh user NOCnetfacil service-type all
+ssh user nokenete
+ssh user nokenete authentication-type all
+ssh user nokenete service-type all
+ssh user nokenetfacil
+ssh user nokenetfacil authentication-type all
+ssh user nokenetfacil service-type all
+ssh user solintel
+ssh user solintel authentication-type all
+ssh user solintel service-type all
+ssh server-source -i Ethernet0/0/0
+ssh server-source all-interface
+ssh ipv6 server-source all-interface
+ssh authorization-type default aaa
+#               
+ssh server cipher aes256_gcm aes128_gcm aes256_ctr aes192_ctr aes128_ctr
+ssh server hmac sha2_512 sha2_256
+ssh server key-exchange dh_group_exchange_sha256 dh_group_exchange_sha1 dh_group14_sha1 ecdh_sha2_nistp256 ecdh_sha2_nistp384 ecdh_sha2_nistp521
+#               
+ssh server publickey ecc rsa
+#               
+ssh server dh-exchange min-len 2048
+#               
+ssh client first-time enable
+ssh client peer 10.33.33.46 assign ecc-key 10.33.33.46
+ssh client peer 10.66.66.26 assign ecc-key 10.66.66.26
+ssh client peer 10.99.99.21 assign ecc-key 10.99.99.21
+ssh client peer 10.99.99.22 assign ecc-key 10.99.99.22
+ssh client peer 10.99.99.25 assign ecc-key 10.99.99.25
+ssh client peer 10.99.99.28 assign ecc-key 10.99.99.28
+ssh client peer 10.99.99.29 assign ecc-key 10.99.99.29
+ssh client peer 10.99.99.30 assign ecc-key 10.99.99.30
+ssh client peer 10.99.99.33 assign ecc-key 10.99.99.33
+ssh client peer 45.167.140.1 assign ecc-key 45.167.140.1
+#               
+ssh client publickey ecc rsa
+#               
+ssh client cipher aes256_gcm aes128_gcm aes256_ctr aes192_ctr aes128_ctr
+ssh client hmac sha2_512 sha2_256
+ssh client key-exchange dh_group_exchange_sha256 dh_group_exchange_sha1 dh_group14_sha1 ecdh_sha2_nistp256 ecdh_sha2_nistp384 ecdh_sha2_nistp521
+#               
+user-interface maximum-vty 21
+#               
+timestamp enable
+#               
+user-interface con 0
+ authentication-mode password
+ set authentication password cipher $1c$:%6UCk;7(P$_oDH95l^_>rl2x,(n!D870IK0J>VC-(C>v&Gt+B8$
+#               
+user-interface vty 0 4
+ authentication-mode aaa
+ user privilege level 3
+ idle-timeout 35791 0
+ protocol inbound ssh
+#               
+user-interface vty 5 20
+ authentication-mode aaa
+ idle-timeout 35791 0
+ protocol inbound ssh
+#               
+netconf         
+ activate module huawei-ip
+#               
+local-aaa-server
+#               
+admin           
+ virtual-system CDN pvmb slot 10 9
+  port-mode port
+  resource u4route upper-limit 341000
+  resource m4route upper-limit 2000
+  resource u6route upper-limit 341000
+  resource m6route upper-limit 512
+  resource vpn-instance upper-limit 512
+  resource cpu weight 5
+  assign interface Eth-Trunk1.32
+  assign interface Eth-Trunk1.648
+  assign interface Eth-Trunk1.667
+  assign interface Eth-Trunk1.3090
+  assign interface Eth-Trunk1.3102
+  assign interface Eth-Trunk1.3300
+  assign interface Eth-Trunk1.3400
+  assign interface Eth-Trunk1.3700
+  assign interface Eth-Trunk1.3904
+  assign interface Virtual-Ethernet0/2/100.100
+ virtual-system IX-UAI pvmb slot 10 9
+  port-mode port
+  resource u4route upper-limit 1048576
+  resource m4route upper-limit 2000
+  resource u6route upper-limit 1048576
+  resource m6route upper-limit 512
+  resource vpn-instance upper-limit 512
+  resource cpu weight 5
+  assign interface Eth-Trunk1.2464
+  assign interface Eth-Trunk1.2465
+  assign interface Eth-Trunk1.2479
+  assign interface Eth-Trunk1.2480
+  assign interface Eth-Trunk1.2716
+  assign interface Eth-Trunk1.2717
+  assign interface Eth-Trunk1.3410
+  assign interface Virtual-Ethernet0/2/100.300
+ virtual-system IX-UAI-02 pvmb slot 10 9
+  port-mode port
+  resource u4route upper-limit 1048576
+  resource m4route upper-limit 2000
+  resource u6route upper-limit 1048576
+  resource m6route upper-limit 512
+  resource vpn-instance upper-limit 512
+  resource cpu weight 5
+#               
+l2tp-group default-lac
+ tunnel name HUAWEI
+#               
+l2tp-group default-lns
+ tunnel name HUAWEI
+#               
+return          
+<NTF-BNG-ITZ-VS-ADM>
